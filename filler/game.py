@@ -14,16 +14,15 @@ class Game():
     board = []
 
     def createBoard(self):
+        above_color = ""
         for i in range(8):
             prev_color = ""
             row = []
             for j in range(8):
-                valid_colors = [col for col in self.colors if col.color != prev_color]
+                above_color = self.board[i - 1][j].color if i > 0 else ""
+                valid_colors = [col for col in self.colors if col.color != prev_color and col.color != above_color]
 
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
-
-                print(str(valid_colors))
-
                 prev_color = add_color.color
 
                 row.append(add_color)
