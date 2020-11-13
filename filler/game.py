@@ -15,9 +15,17 @@ class Game():
 
     def createBoard(self):
         for i in range(8):
+            prev_color = ""
             row = []
             for j in range(8):
-                add_color = self.colors[random.randint(0, 5)]
+                valid_colors = [col for col in self.colors if col.color != prev_color]
+
+                add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
+
+                print(str(valid_colors))
+
+                prev_color = add_color.color
+
                 row.append(add_color)
             self.board.append(row)
 
@@ -28,7 +36,7 @@ class Game():
         for i in range(8):
             for j in range(8):
                 return_string += f"{self.board[i][j].color}"
-                return_string += " " * (7 - len(self.board[i][j].color))
+                return_string += " " * (8 - len(self.board[i][j].color))
             return_string += "\n"
 
         return return_string
