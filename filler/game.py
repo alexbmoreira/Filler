@@ -3,12 +3,37 @@ import random
 
 class Game():
     colors = [
-        Color("red", 0),
-        Color("blue", 0),
-        Color("green", 0),
-        Color("purple", 0),
-        Color("yellow", 0),
-        Color("black", 0)
+        color.Color("red", 0),
+        color.Color("blue", 0),
+        color.Color("green", 0),
+        color.Color("purple", 0),
+        color.Color("yellow", 0),
+        color.Color("black", 0)
     ]
 
     board = []
+
+    def createBoard(self):
+        for i in range(8):
+            row = []
+            for j in range(8):
+                add_color = self.colors[random.randint(0, 5)]
+                row.append(add_color)
+            self.board.append(row)
+
+    def __str__(self):
+        return_string = ""
+
+
+        for i in range(8):
+            for j in range(8):
+                return_string += f"{self.board[i][j].color}"
+                return_string += " " * (7 - len(self.board[i][j].color))
+            return_string += "\n"
+
+        return return_string
+
+if __name__ == "__main__":
+    game = Game()
+    game.createBoard()
+    print(str(game))
