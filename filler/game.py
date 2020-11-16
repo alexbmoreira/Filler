@@ -1,4 +1,5 @@
 import color
+import board as brd
 import random
 
 class Game():
@@ -11,34 +12,25 @@ class Game():
         color.Color("black", 0)
     ]
 
-    board = []
+    board = brd.Board(8)
 
     def createBoard(self):
         above_color = ""
-        for i in range(8):
+        for i in range(self.board.size):
             prev_color = ""
             row = []
-            for j in range(8):
-                above_color = self.board[i - 1][j].color if i > 0 else ""
+            for j in range(self.board.size):
+                above_color = self.board.grid[i - 1][j].color if i > 0 else ""
                 valid_colors = [col for col in self.colors if col.color != prev_color and col.color != above_color]
 
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color.color
 
                 row.append(add_color)
-            self.board.append(row)
+            self.board.grid.append(row)
 
     def __str__(self):
-        return_string = ""
-
-
-        for i in range(8):
-            for j in range(8):
-                return_string += f"{self.board[i][j].color}"
-                return_string += " " * (8 - len(self.board[i][j].color))
-            return_string += "\n"
-
-        return return_string
+        return str(self.board)
 
 if __name__ == "__main__":
     game = Game()
