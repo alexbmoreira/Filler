@@ -40,6 +40,7 @@ class Board():
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color.name
 
-                self.colors[self.colors.index(add_color)].count += 1
                 row.append(add_color)
+
+                self.colors[self.colors.index(add_color)].count += 1
             self.grid.append(row)
