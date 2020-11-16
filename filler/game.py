@@ -10,4 +10,7 @@ class Game():
 if __name__ == "__main__":
     game = Game()
 
+    for color in game.board.colors:
+        print(f"{color.name} - {color.count}")
+        
     print(str(game))
