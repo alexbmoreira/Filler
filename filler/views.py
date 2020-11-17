@@ -1,6 +1,9 @@
 from flask import render_template
 from filler import app
 
+from .models import *
+
 @app.route('/')
 def index():
-    return render_template("home/index.html", word="WAZZZAAAPPP")
+    game = Game()
+    return render_template("home/index.html", game=str(game))
