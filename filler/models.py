@@ -7,7 +7,7 @@ class Color():
         self.count = 0
 
     def __repr__(self):
-        return self.color
+        return self.name
 
 class Board():
     colors = [
