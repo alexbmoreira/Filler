@@ -3,6 +3,7 @@
 A filler game played against a computer.
 
 ## Running the Flask server
+
 Use a virtual environment and pip install dependencies:
 
 ```shell
@@ -17,3 +18,16 @@ export FLASK_APP=run.py
 flask run
 ```
 
+## Testing
+
+```shell
+pip install -e .
+```
+
+This is equivalent to running
+
+```shell
+python setup.py develop
+```
+
+and will install filler as a package
