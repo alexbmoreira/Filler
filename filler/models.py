@@ -1,7 +1,7 @@
 import random
 
 class Color():
-    
+
     def __init__(self, name):
         self.name = name
         self.count = 0
