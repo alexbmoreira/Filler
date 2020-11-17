@@ -1,7 +1,7 @@
 from flask import render_template
 from filler import app
 
-from .models import *
+from .models import Game
 
 @app.route('/')
 def index():
