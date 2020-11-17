@@ -1,5 +1,5 @@
 from flask import render_template
-from filler import app
+from . import app
 
 from .models import Game
 

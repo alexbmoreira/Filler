@@ -1,1 +1,1 @@
-from filler import app
+from filler.core import app
