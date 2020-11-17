@@ -1,5 +1,11 @@
-import color as clr
 import random
+
+class Game():
+
+    board = brd.Board(8)
+
+    def __str__(self):
+        return str(self.board)
 
 class Board():
     colors = [
@@ -44,3 +50,12 @@ class Board():
 
                 self.colors[self.colors.index(add_color)].count += 1
             self.grid.append(row)
+
+class Color():
+    
+    def __init__(self, name):
+        self.name = name
+        self.count = 0
+
+    def __repr__(self):
+        return self.color
