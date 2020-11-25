@@ -5,5 +5,5 @@ from ..filler.models import Game
 
 @app.route('/')
 def index():
-    game = Game().toJSON()
-    return render_template("home/index.html", game=game)
+    game = Game()
+    return render_template("home/index.html", game=game.toJSON())
