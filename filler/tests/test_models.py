@@ -1,6 +1,6 @@
 import unittest
 
-from ..filler.models import (Color, Board)
+from ..filler.models import (Color, Board, Game)
 
 class TestColor(unittest.TestCase):
 
@@ -32,6 +32,34 @@ class TestBoard(unittest.TestCase):
                                                                 {'name': 'red', 'count': 0, 'player': 0}
                                                             ]
                                                         ]})
+
+class TestGame(unittest.TestCase):
+
+    def test_toJSON(self):
+        test_board = [[Color("black"), Color("blue"), Color("red")],
+                    [Color("yellow"), Color("purple"), Color("green")],
+                    [Color("black"), Color("blue"), Color("red")]]
+
+        self.assertEqual(Game(test_board).toJSON(), {"board": {
+                                                            'size': 3,
+                                                            'board': [
+                                                                [
+                                                                    {'name': 'black', 'count': 0, 'player': 0},
+                                                                    {'name': 'blue', 'count': 0, 'player': 0},
+                                                                    {'name': 'red', 'count': 0, 'player': 0}
+                                                                ],
+                                                                [
+                                                                    {'name': 'yellow', 'count': 0, 'player': 0},
+                                                                    {'name': 'purple', 'count': 0, 'player': 0},
+                                                                    {'name': 'green', 'count': 0, 'player': 0}
+                                                                ],
+                                                                [
+                                                                    {'name': 'black', 'count': 0, 'player': 0},
+                                                                    {'name': 'blue', 'count': 0, 'player': 0},
+                                                                    {'name': 'red', 'count': 0, 'player': 0}
+                                                                ]
+                                                            ]}
+                                                        })
 
 if __name__ == '__main__':
     unittest.main()

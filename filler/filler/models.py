@@ -73,7 +73,14 @@ class Board():
 
 class Game():
 
-    board = Board(8)
+    def __init__(self, board = None):
+        if board == None:
+            self.board = Board(8)
+        else:
+            self.board = Board(3, board)
 
     def __str__(self):
         return str(self.board)
+
+    def toJSON(self):
+        return {"board": self.board.toJSON()}
