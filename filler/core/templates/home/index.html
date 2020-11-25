@@ -13,7 +13,7 @@
         {% for row in game.board.grid %}
         <div class="row">
             {% for tile in row %}
-            <div class="tile" style="background-color: {{ tile.name }};">
+            <div class="tile" style="background-color: var(--{{ tile.name }}-tile);" data-tile="{{ tile }}">
             </div>
             {% endfor %}
         </div>
