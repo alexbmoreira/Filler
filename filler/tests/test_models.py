@@ -1,5 +1,7 @@
 import unittest
 
+from ..filler.models import Color
+
 class TestColor(unittest.TestCase):
 
     def test_toJSON(self):
