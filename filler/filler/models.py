@@ -11,7 +11,9 @@ class Color():
         return self.name
         
     def toJSON(self):
-        return self.name
+        return {"name": self.name,
+                "count": self.count,
+                "player": self.player}
 
 class Board():
     colors = [
@@ -25,9 +27,12 @@ class Board():
 
     grid = []
 
-    def __init__(self, size):
+    def __init__(self, size, board = None):
         self.size = size
-        self.createBoard()
+        if board == None:
+            self.createBoard()
+        else:
+            self.board = board
 
     def __str__(self):
         return_string = ""
@@ -61,6 +66,10 @@ class Board():
 
                 self.colors[self.colors.index(add_color)].count += 1
             self.grid.append(row)
+
+    def toJSON(self):
+        return {"size": self.size,
+                "board": [[color.toJSON() for color in row] for row in self.board]}
 
 class Game():
 
