@@ -7,6 +7,14 @@
     --yellow-tile: #fcee32;
 }
 
+body {
+    background-color: #e6e6e6;
+}
+
+.game-board {
+    filter: drop-shadow(0px 10px 20px #7a7a7a);
+}
+
 .row{
 	display: flex;
 	flex-wrap: wrap;

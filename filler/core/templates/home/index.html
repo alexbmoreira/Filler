@@ -10,14 +10,15 @@
 <div class="container">
     <h1>Filler</h1>
     <div class="game-container">
-        {% for row in game.board.grid %}
-        <div class="row">
-            {% for tile in row %}
-            <div class="tile" style="background-color: var(--{{ tile.name }}-tile);" data-tile="{{ tile }}">
+        <div class="game-board">
+            {% for row in game.board.grid %}
+            <div class="row">
+                {% for tile in row %}
+                <div class="tile" style="background-color: var(--{{ tile.name }}-tile);" data-tile="{{ tile }}"></div>
+                {% endfor %}
             </div>
             {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
     
