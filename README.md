@@ -21,13 +21,5 @@ flask run
 ## Testing
 
 ```shell
-pip install -e .
+python3 -m filler.tests.test_models
 ```
-
-This is equivalent to running
-
-```shell
-python setup.py develop
-```
-
-and will install filler as a package
