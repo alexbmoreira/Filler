@@ -15,7 +15,8 @@ class TestBoard(unittest.TestCase):
                     [Color("black"), Color("blue"), Color("red")]]
 
         self.assertEqual(Board(3, test_board).toJSON(), {'size': 3,
-                                                        'board': [
+                                                        'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                        'grid': [
                                                             [
                                                                 {'name': 'black', 'count': 0, 'player': 0},
                                                                 {'name': 'blue', 'count': 0, 'player': 0},
@@ -40,9 +41,10 @@ class TestGame(unittest.TestCase):
                     [Color("yellow"), Color("purple"), Color("green")],
                     [Color("black"), Color("blue"), Color("red")]]
 
-        self.assertEqual(Game(test_board).toJSON(), {"board": {
+        self.assertEqual(Game(test_board).toJSON(), {'board': {
                                                             'size': 3,
-                                                            'board': [
+                                                            'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                            'grid': [
                                                                 [
                                                                     {'name': 'black', 'count': 0, 'player': 0},
                                                                     {'name': 'blue', 'count': 0, 'player': 0},
