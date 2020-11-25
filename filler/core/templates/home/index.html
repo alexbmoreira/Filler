@@ -7,7 +7,18 @@
 {% endblock scripts %}
 
 {% block main %}
+<div class="container">
     <h1>Filler</h1>
-    <p>{{ game }}</p>
-    <p>Hello</p>
+    <div class="game-container">
+        {% for row in game.board.grid %}
+        <div class="row">
+            {% for tile in row %}
+            <div class="tile" style="background-color: {{ tile.name }};">
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    
 {% endblock main %}

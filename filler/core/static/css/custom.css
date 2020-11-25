@@ -1,0 +1,9 @@
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tile{
+    height: 50px;
+    width: 50px;
+}
