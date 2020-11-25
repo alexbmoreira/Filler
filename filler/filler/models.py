@@ -73,6 +73,7 @@ class Board():
 
     def toJSON(self):
         return {"size": self.size,
+                "colors": [color.name for color in self.colors],
                 "grid": [[color.toJSON() for color in row] for row in self.grid]}
 
 class Game():
