@@ -1,54 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap");
 
-:root{
-    --black-tile: #262626;
-    --blue-tile: #2f76c7;
-    --green-tile: #309b26;
-    --purple-tile: #8a4da8;
-    --red-tile: #ca2626;
-    --yellow-tile: #fcee32;
+:root {
+	--black-tile: #262626;
+	--blue-tile: #2f76c7;
+	--green-tile: #309b26;
+	--purple-tile: #8a4da8;
+	--red-tile: #ca2626;
+	--yellow-tile: #fcee32;
 }
 
 body {
-    font-family: 'Arvo', serif;
-    background-color: #e6e6e6;
+	font-family: "Arvo", serif;
+	background-color: #e6e6e6;
 }
 
 .mt {
-    margin-top: 1.5em;
+	margin-top: 1.5em;
 }
 
 .space-between {
-    justify-content: space-between;
+	justify-content: space-between;
 }
 
 .center {
 	display: flex;
 	justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	align-items: center;
+	flex-direction: column;
 }
 
 .game-board {
-    filter: drop-shadow(0px 0px 10px #7a7a7a);
+	filter: drop-shadow(0px 0px 10px #7a7a7a);
 }
 
-.row{
+.row {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.tile{
-    height: 50px;
-    width: 50px;
+.tile {
+	height: 50px;
+	width: 50px;
 }
-.option-tile{
-    height: 50px;
-    width: 50px;
-    filter: drop-shadow(0px 0px 3px #aaaaaa);
+.tile.player {
+	animation: player-tile 1.5s linear infinite;
 }
-.option-tile.invalid{
-    height: 20px;
-    width: 20px;
-    filter: drop-shadow(0px 0px 1px #aaaaaa);
+
+@keyframes player-tile {
+	50% {
+		opacity: 75%;
+	}
+}
+.option-tile {
+	height: 50px;
+	width: 50px;
+	filter: drop-shadow(0px 0px 3px #aaaaaa);
+}
+.option-tile.invalid {
+	height: 20px;
+	width: 20px;
+	filter: drop-shadow(0px 0px 1px #aaaaaa);
 }

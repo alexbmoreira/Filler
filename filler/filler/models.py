@@ -59,9 +59,9 @@ class Board():
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color.name
 
-                if i == 0 and j == self.size - 1:
+                if i == self.size - 1 and j == 0:
                     add_color.player = 1
-                elif i == self.size - 1 and j == 0:
+                elif i == 0 and j == self.size - 1:
                     add_color.player = 2
 
                 row.append(add_color)
