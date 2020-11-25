@@ -10,13 +10,18 @@
 <div class="container center">
     <h1>Filler</h1>
     <div class="game-container">
-        <div class="game-board">
+        <div class="game-board drop-shadow">
             {% for row in game.board.grid %}
             <div class="row">
                 {% for tile in row %}
                 <div class="tile" style="background-color: var(--{{ tile.name }}-tile);" data-tile="{{ tile }}"></div>
                 {% endfor %}
             </div>
+            {% endfor %}
+        </div>
+        <div class="row mt space-between">
+            {% for color in game.board.colors %}
+            <div class="option-tile" style="background-color: var(--{{ color }}-tile);"></div>
             {% endfor %}
         </div>
     </div>
