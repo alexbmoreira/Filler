@@ -1,12 +1,20 @@
-if __name__ == "__main__" and __package__ is None:
-    from sys import path
-    from os.path import dirname as dir
+import unittest
 
-    path.append(dir(path[0]))
-    __package__ = "tests"
-    
-from ..core.models import Color
+class TestColor(unittest.TestCase):
 
-def test_color():
-    color = Color("red")
-    assert color.name == "red"
+    def test_toJSON(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+    def test_split(self):
+        s = 'hello world'
+        self.assertEqual(s.split(), ['hello', 'world'])
+        # check that s.split fails when the separator is not a string
+        with self.assertRaises(TypeError):
+            s.split(2)
+
+if __name__ == '__main__':
+    unittest.main()
