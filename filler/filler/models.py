@@ -9,6 +9,9 @@ class Color():
 
     def __repr__(self):
         return self.name
+        
+    def toJSON(self):
+        return self.name
 
 class Board():
     colors = [
