@@ -30,7 +30,7 @@ class Board():
     def __init__(self, size, grid = None):
         self.size = size
         if grid == None:
-            self.createBoard()
+            self.grid = self.createBoard()
         else:
             self.grid = grid
 
@@ -46,12 +46,14 @@ class Board():
         return return_string
 
     def createBoard(self):
+        new_grid = []
+
         above_color = ""
         for i in range(self.size):
             prev_color = ""
             row = []
             for j in range(self.size):
-                above_color = self.grid[i - 1][j].name if i > 0 else ""
+                above_color = new_grid[i - 1][j].name if i > 0 else ""
                 valid_colors = [color for color in self.colors if color.name != prev_color and color.name != above_color]
 
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
@@ -65,7 +67,9 @@ class Board():
                 row.append(add_color)
 
                 self.colors[self.colors.index(add_color)].count += 1
-            self.grid.append(row)
+            new_grid.append(row)
+        
+        return new_grid
 
     def toJSON(self):
         return {"size": self.size,

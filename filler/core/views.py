@@ -3,8 +3,7 @@ from . import app
 
 from ..filler.models import Game
 
-game = Game()
-
 @app.route('/')
 def index():
+    game = Game()
     return render_template("home/index.html", game=game.toJSON())
