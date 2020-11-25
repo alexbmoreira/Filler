@@ -1,9 +1,9 @@
-from flask import render_template
+from flask import make_response, render_template, jsonify, request, session, redirect, url_for
 from . import app
 
 from ..filler.models import Game
 
 @app.route('/')
 def index():
-    game = Game()
-    return render_template("home/index.html", game=str(game))
+    game = Game().toJSON()
+    return render_template("home/index.html", game=game)

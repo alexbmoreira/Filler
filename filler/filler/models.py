@@ -27,12 +27,12 @@ class Board():
 
     grid = []
 
-    def __init__(self, size, board = None):
+    def __init__(self, size, grid = None):
         self.size = size
-        if board == None:
+        if grid == None:
             self.createBoard()
         else:
-            self.board = board
+            self.grid = grid
 
     def __str__(self):
         return_string = ""
@@ -69,7 +69,7 @@ class Board():
 
     def toJSON(self):
         return {"size": self.size,
-                "board": [[color.toJSON() for color in row] for row in self.board]}
+                "board": [[color.toJSON() for color in row] for row in self.grid]}
 
 class Game():
 
