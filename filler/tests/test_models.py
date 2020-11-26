@@ -104,5 +104,36 @@ class TestGame(unittest.TestCase):
                                                         ]}
                                                     })
 
+    def test_makeTwoMoves(self):
+        test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
+                    [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
+                    [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
+        test_game = Game(test_board)
+        test_game.makeMove(test_game.player_1, Color('blue'))
+        test_game.makeMove(test_game.player_1, Color('yellow'))
+
+        self.assertEqual(test_game.toJSON(), {'player_1': {'player_num': 1, 'color': {'name': 'yellow'}, 'score': 3},
+                                                'board': {
+                                                        'size': 3,
+                                                        'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                        'grid': [
+                                                            [
+                                                                {'player': 1, 'color': {'name': 'yellow'}},
+                                                                {'player': 1, 'color': {'name': 'yellow'}},
+                                                                {'player': 0, 'color': {'name': 'red'}}
+                                                            ],
+                                                            [
+                                                                {'player': 1, 'color': {'name': 'yellow'}},
+                                                                {'player': 0, 'color': {'name': 'purple'}},
+                                                                {'player': 0, 'color': {'name': 'green'}}
+                                                            ],
+                                                            [
+                                                                {'player': 0, 'color': {'name': 'black'}},
+                                                                {'player': 0, 'color': {'name': 'blue'}},
+                                                                {'player': 2, 'color': {'name': 'red'}}
+                                                            ]
+                                                        ]}
+                                                    })
+
 if __name__ == '__main__':
     unittest.main()
