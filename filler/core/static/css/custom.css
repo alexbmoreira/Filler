@@ -45,7 +45,6 @@ body {
 .tile.player {
 	animation: player-tile 1.5s linear infinite;
 }
-
 @keyframes player-tile {
 	50% {
 		opacity: 75%;

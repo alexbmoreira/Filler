@@ -5,15 +5,23 @@ class Color():
     def __init__(self, name):
         self.name = name
         self.count = 0
-        self.player = 0
 
     def __repr__(self):
         return self.name
         
     def toJSON(self):
         return {"name": self.name,
-                "count": self.count,
-                "player": self.player}
+                "count": self.count}
+
+class Tile():
+
+    def __init__(self, color, player):
+        self.player = player
+        self.color = color
+
+    def toJSON(self):
+        return {"player": self.player,
+                "color": self.color.toJSON()}
 
 class Board():
     colors = [
@@ -59,10 +67,10 @@ class Board():
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color.name
 
-                if i == self.size - 1 and j == 0:
-                    add_color.player = 1
-                elif i == 0 and j == self.size - 1:
-                    add_color.player = 2
+                # if i == self.size - 1 and j == 0:
+                #     add_color.player = 1
+                # elif i == 0 and j == self.size - 1:
+                #     add_color.player = 2
 
                 row.append(add_color)
 
