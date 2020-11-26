@@ -14,7 +14,7 @@
             {% for row in game.board.grid %}
             <div class="row">
                 {% for tile in row %}
-                <div class="tile {{ 'player' if tile.player == 1 else '' }}" style="background-color: var(--{{ tile.name }}-tile);" data-tile="{{ tile }}"></div>
+                <div class="tile {{ 'player' if tile.player == 1 else '' }}" style="background-color: var(--{{ tile.color.name }}-tile);" data-tile="{{ tile }}"></div>
                 {% endfor %}
             </div>
             {% endfor %}
