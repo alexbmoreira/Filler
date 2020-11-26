@@ -1,6 +1,6 @@
 import unittest
 
-from ..filler.models import (Color, Tile, Board, Game)
+from ..filler.models import *
 
 class TestColor(unittest.TestCase):
 
@@ -10,7 +10,12 @@ class TestColor(unittest.TestCase):
 class TestTile(unittest.TestCase):
 
     def test_toJSON(self):
-        self.assertEqual(Tile("red", 1).toJSON(), {'player':1, 'color': {'name': 'red'}})
+        self.assertEqual(Tile("red", 1).toJSON(), {'player': 1, 'color': {'name': 'red'}})
+
+class TestPlayer(unittest.TestCase):
+
+    def test_toJSON(self):
+        self.assertEqual(Player(1, "red", 0).toJSON(), {'player_num': 1, 'color': {'name': 'red'}, 'score': 0})
 
 class TestBoard(unittest.TestCase):
 
