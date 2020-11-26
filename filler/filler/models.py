@@ -23,7 +23,7 @@ class Tile():
 
 class Player():
 
-    def __init__(self, player_num, color, score = 0):
+    def __init__(self, player_num, color, score = 1):
         self.player_num = player_num
         self.color = Color(color)
         self.score = score
@@ -104,11 +104,43 @@ class Game():
         else:
             self.board = Board(3, board)
         
-        self.player_1 = Player(1, self.board.grid[0][0].color.name, 0)
-
+        self.player_1 = Player(1, self.board.grid[0][0].color.name)
 
     def __str__(self):
         return str(self.board)
+
+    def makeMove(self, player, color):
+        change_tiles = []
+        player.color = color
+
+        for i in range(self.board.size):
+            for j in range(self.board.size):
+                tile = self.board.grid[i][j]
+
+                if tile.player == player.player_num:
+                    tile.color = color
+
+                if tile.player == 0 and tile.color.name == color.name:
+                    self.checkTile(i, j, self.board, player.player_num, change_tiles)
+                
+        while len(change_tiles) > 0:
+            coords = change_tiles.pop(0)
+            player.score += 1
+            self.board.grid[coords[0]][coords[1]].player = player.player_num
+
+    def checkTile(self, i, j, board, player_num, change_tiles):
+        # check above
+        if i > 0 and board.grid[i - 1][j].player == player_num:
+            change_tiles.append((i, j))
+        # check below
+        if i < board.size - 1 and board.grid[i + 1][j].player == player_num:
+            change_tiles.append((i, j))
+        # check left
+        if j > 0 and board.grid[i][j - 1].player == player_num:
+            change_tiles.append((i, j))
+        # check right
+        if j < board.size - 1 and board.grid[i][j + 1].player == player_num:
+            change_tiles.append((i, j))
 
     def toJSON(self):
         return {"player_1": self.player_1.toJSON(),
