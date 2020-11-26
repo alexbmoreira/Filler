@@ -103,9 +103,13 @@ class Game():
             self.board = Board(8)
         else:
             self.board = Board(3, board)
+        
+        self.player_1 = Player(1, self.board.grid[0][0].color.name, 0)
+
 
     def __str__(self):
         return str(self.board)
 
     def toJSON(self):
-        return {"board": self.board.toJSON()}
+        return {"player_1": self.player_1.toJSON(),
+                "board": self.board.toJSON()}
