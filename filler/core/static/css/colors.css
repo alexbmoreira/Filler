@@ -1,0 +1,24 @@
+.black {
+    background-color: var(--black-tile);
+    color: white;
+}
+.blue {
+    background-color: var(--blue-tile);
+    color: white;
+}
+.green {
+    background-color: var(--green-tile);
+    color: white;
+}
+.purple {
+    background-color: var(--purple-tile);
+    color: white;
+}
+.red {
+    background-color: var(--red-tile);
+    color: white;
+}
+.yellow {
+    background-color: var(--yellow-tile);
+    color: black;
+}

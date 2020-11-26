@@ -2,6 +2,10 @@
 
 {% block title %}Filler{% endblock title %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}" rel="stylesheet">
+{% endblock styles %}
+
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 {% endblock scripts %}
@@ -10,18 +14,28 @@
 <div class="container center">
     <h1>Filler</h1>
     <div class="game-container">
+        <div class="row mb space-between">
+            <div class="row">
+                <span>Player 1</span>
+                <span class="score {{ game.player_1.color.name }}">{{ game.player_1.score }}</span>
+            </div>
+            <div class="row">
+                <span class="score">0</span>
+                <span>Player 2</span>
+            </div>
+        </div>
         <div class="game-board drop-shadow">
             {% for row in game.board.grid %}
             <div class="row">
                 {% for tile in row %}
-                <div class="tile {{ 'player' if tile.player == 1 else '' }}" style="background-color: var(--{{ tile.color.name }}-tile);" data-tile="{{ tile }}"></div>
+                <div class="tile {{ 'player' if tile.player == 1 else '' }}  {{ tile.color.name }}" data-tile="{{ tile }}"></div>
                 {% endfor %}
             </div>
             {% endfor %}
         </div>
         <div class="row mt space-between">
             {% for color in game.board.colors %}
-            <div class="option-tile" style="background-color: var(--{{ color }}-tile);"></div>
+            <div class="option-tile  {{ color }}"></div>
             {% endfor %}
         </div>
     </div>
