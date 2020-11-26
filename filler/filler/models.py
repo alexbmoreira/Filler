@@ -21,6 +21,18 @@ class Tile():
         return {"player": self.player,
                 "color": self.color.toJSON()}
 
+class Player():
+
+    def __init__(self, player_num, color, score = 0):
+        self.player_num = player_num
+        self.color = Color(color)
+        self.score = score
+
+    def toJSON(self):
+        return {"player_num": self.player_num,
+                "color": self.color.toJSON(),
+                "score": self.score}
+
 class Board():
     colors = [
         "red",
@@ -73,8 +85,6 @@ class Board():
                 elif i == self.size - 1 and j == self.size - 1:
                     new_tile.player = 2
 
-                print(new_tile.toJSON())
-
                 row.append(new_tile)
 
             new_grid.append(row)
@@ -93,9 +103,13 @@ class Game():
             self.board = Board(8)
         else:
             self.board = Board(3, board)
+        
+        self.player_1 = Player(1, self.board.grid[0][0].color.name, 0)
+
 
     def __str__(self):
         return str(self.board)
 
     def toJSON(self):
-        return {"board": self.board.toJSON()}
+        return {"player_1": self.player_1.toJSON(),
+                "board": self.board.toJSON()}
