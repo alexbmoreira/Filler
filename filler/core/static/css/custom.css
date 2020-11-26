@@ -66,5 +66,7 @@ body {
 
 .score {
 	margin: 0 10px;
-	padding: 0 10px;
+	width: 30px;
+	display: flex;
+	justify-content: center;
 }
