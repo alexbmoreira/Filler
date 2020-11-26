@@ -4,14 +4,12 @@ class Color():
 
     def __init__(self, name):
         self.name = name
-        self.count = 0
 
     def __repr__(self):
         return self.name
         
     def toJSON(self):
-        return {"name": self.name,
-                "count": self.count}
+        return {"name": self.name}
 
 class Tile():
 
@@ -78,7 +76,6 @@ class Board():
 
                 row.append(new_tile)
 
-                self.colors[self.colors.index(add_color)].count += 1
             new_grid.append(row)
         
         return new_grid

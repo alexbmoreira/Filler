@@ -5,14 +5,12 @@ from ..filler.models import (Color, Tile, Board, Game)
 class TestColor(unittest.TestCase):
 
     def test_toJSON(self):
-        self.assertEqual(Color("red").toJSON(), {'name': 'red', 'count': 0})
+        self.assertEqual(Color("red").toJSON(), {'name': 'red'})
 
 class TestTile(unittest.TestCase):
 
     def test_toJSON(self):
-        self.assertEqual(Tile("red", 1).toJSON(), {'player':1,
-                                                    'color': {'name': 'red', 'count': 0}
-                                                    })
+        self.assertEqual(Tile("red", 1).toJSON(), {'player':1, 'color': {'name': 'red'}})
 
 class TestBoard(unittest.TestCase):
 
@@ -25,19 +23,19 @@ class TestBoard(unittest.TestCase):
                                                         'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
                                                         'grid': [
                                                             [
-                                                                {'name': 'black', 'count': 0},
-                                                                {'name': 'blue', 'count': 0},
-                                                                {'name': 'red', 'count': 0}
+                                                                {'name': 'black'},
+                                                                {'name': 'blue'},
+                                                                {'name': 'red'}
                                                             ],
                                                             [
-                                                                {'name': 'yellow', 'count': 0},
-                                                                {'name': 'purple', 'count': 0},
-                                                                {'name': 'green', 'count': 0}
+                                                                {'name': 'yellow'},
+                                                                {'name': 'purple'},
+                                                                {'name': 'green'}
                                                             ],
                                                             [
-                                                                {'name': 'black', 'count': 0},
-                                                                {'name': 'blue', 'count': 0},
-                                                                {'name': 'red', 'count': 0}
+                                                                {'name': 'black'},
+                                                                {'name': 'blue'},
+                                                                {'name': 'red'}
                                                             ]
                                                         ]})
 
@@ -53,19 +51,19 @@ class TestGame(unittest.TestCase):
                                                             'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
                                                             'grid': [
                                                                 [
-                                                                    {'name': 'black', 'count': 0},
-                                                                    {'name': 'blue', 'count': 0},
-                                                                    {'name': 'red', 'count': 0}
+                                                                    {'name': 'black'},
+                                                                    {'name': 'blue'},
+                                                                    {'name': 'red'}
                                                                 ],
                                                                 [
-                                                                    {'name': 'yellow', 'count': 0},
-                                                                    {'name': 'purple', 'count': 0},
-                                                                    {'name': 'green', 'count': 0}
+                                                                    {'name': 'yellow'},
+                                                                    {'name': 'purple'},
+                                                                    {'name': 'green'}
                                                                 ],
                                                                 [
-                                                                    {'name': 'black', 'count': 0},
-                                                                    {'name': 'blue', 'count': 0},
-                                                                    {'name': 'red', 'count': 0}
+                                                                    {'name': 'black'},
+                                                                    {'name': 'blue'},
+                                                                    {'name': 'red'}
                                                                 ]
                                                             ]}
                                                         })
