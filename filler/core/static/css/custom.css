@@ -7,6 +7,8 @@
 	--purple-tile: #8a4da8;
 	--red-tile: #ca2626;
 	--yellow-tile: #fcee32;
+
+	--drop-shadow: drop-shadow(0px 0px 10px #aaaaaa);
 }
 
 body {
@@ -33,7 +35,7 @@ body {
 }
 
 .game-board {
-	filter: drop-shadow(0px 0px 10px #7a7a7a);
+	filter: var(--drop-shadow);
 }
 
 .row {
@@ -56,12 +58,12 @@ body {
 .option-tile {
 	height: 50px;
 	width: 50px;
-	filter: drop-shadow(0px 0px 3px #aaaaaa);
+	filter: var(--drop-shadow);
 }
 .option-tile.invalid {
 	height: 20px;
 	width: 20px;
-	filter: drop-shadow(0px 0px 1px #aaaaaa);
+	filter: var(--drop-shadow);
 }
 
 .score {
