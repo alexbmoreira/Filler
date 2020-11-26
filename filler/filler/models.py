@@ -47,8 +47,8 @@ class Board():
 
         for i in range(self.size):
             for j in range(self.size):
-                return_string += f"{self.grid[i][j].name}"
-                return_string += " " * (self.size - len(self.grid[i][j].name))
+                return_string += f"{self.grid[i][j].color.name}"
+                return_string += " " * (self.size - len(self.grid[i][j].color.name))
             return_string += "\n"
 
         return return_string
@@ -61,18 +61,22 @@ class Board():
             prev_color = ""
             row = []
             for j in range(self.size):
-                above_color = new_grid[i - 1][j].name if i > 0 else ""
+                above_color = new_grid[i - 1][j].color.name if i > 0 else ""
                 valid_colors = [color for color in self.colors if color.name != prev_color and color.name != above_color]
 
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color.name
 
-                # if i == self.size - 1 and j == 0:
-                #     add_color.player = 1
-                # elif i == 0 and j == self.size - 1:
-                #     add_color.player = 2
+                new_tile = Tile(add_color, 0)
 
-                row.append(add_color)
+                if i == 0 and j == 0:
+                    new_tile.player = 1
+                elif i == self.size - 1 and j == self.size - 1:
+                    new_tile.player = 2
+
+                print(new_tile.toJSON())
+
+                row.append(new_tile)
 
                 self.colors[self.colors.index(add_color)].count += 1
             new_grid.append(row)
@@ -82,7 +86,7 @@ class Board():
     def toJSON(self):
         return {"size": self.size,
                 "colors": [color.name for color in self.colors],
-                "grid": [[color.toJSON() for color in row] for row in self.grid]}
+                "grid": [[tile.toJSON() for tile in row] for row in self.grid]}
 
 class Game():
 
