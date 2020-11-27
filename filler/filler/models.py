@@ -128,33 +128,54 @@ class Game():
             player.score += 1
             self.board.grid[coords[0]][coords[1]].player = player.player_num
 
-    def checkTile(self, i, j, board, player_num, change_tiles):
+    def checkTile(self, i, j, board, player_num, coords_list):
         # check above
         if i > 0 and board.grid[i - 1][j].player == player_num:
-            change_tiles.append((i, j))
+            coords_list.append((i, j))
         # check below
         if i < board.size - 1 and board.grid[i + 1][j].player == player_num:
-            change_tiles.append((i, j))
+            coords_list.append((i, j))
         # check left
         if j > 0 and board.grid[i][j - 1].player == player_num:
-            change_tiles.append((i, j))
+            coords_list.append((i, j))
         # check right
         if j < board.size - 1 and board.grid[i][j + 1].player == player_num:
-            change_tiles.append((i, j))
+            coords_list.append((i, j))
 
     def determineBestMove(self, player):
         adj_colors = {}
+        adj_coords = []
 
         for i in range(self.board.size):
             for j in range(self.board.size):
                 tile = self.board.grid[i][j]
                 if tile.player == player.player_num:
-                    if tile.color.name in adj_colors:
-                        adj_colors[tile.color.name] += 1
-                    else:
-                        adj_colors[tile.color.name] = 1
+                    self.checkAdj(i, j, self.board, player.player_num, adj_coords)
+
+        while len(adj_coords) > 0:
+            coords = adj_coords.pop(0)
+            tile = self.board.grid[coords[0]][coords[1]]
+            if tile.color.name in adj_colors:
+                adj_colors[tile.color.name] += 1
+            else:
+                adj_colors[tile.color.name] = 1
 
         return adj_colors
+
+
+    def checkAdj(self, i, j, board, player_num, coords_list):
+        # check above
+        if i > 0:
+            coords_list.append((i - 1, j))
+        # check below
+        if i < board.size - 1:
+            coords_list.append((i + 1, j))
+        # check left
+        if j > 0:
+            coords_list.append((i, j - 1))
+        # check right
+        if j < board.size - 1:
+            coords_list.append((i, j + 1))
 
     def toJSON(self):
         return {"player_1": self.player_1.toJSON(),
