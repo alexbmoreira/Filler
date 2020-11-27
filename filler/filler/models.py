@@ -11,6 +11,15 @@ class Color():
     def toJSON(self):
         return {"name": self.name}
 
+class ColorChoice(Color):
+    def __init__(self, name, available = True):
+        super().__init__(name)
+        self.available = available
+
+    def toJSON(self):
+        return {"name": self.name,
+                "available": self.available}
+
 class Tile():
 
     def __init__(self, color, player):
@@ -30,7 +39,9 @@ class Player():
 
     def makeMove(self, board, color):
         change_tiles = []
+        [color for color in board.colors if color.name == self.color.name][0].available = True
         self.color = color
+        [color for color in board.colors if color.name == self.color.name][0].available = False
 
         for i in range(board.size):
             for j in range(board.size):
@@ -110,18 +121,19 @@ class Computer(Player):
 
 class Board():
     colors = [
-        "red",
-        "blue",
-        "green",
-        "purple",
-        "yellow",
-        "black"
+        ColorChoice("red"),
+        ColorChoice("blue"),
+        ColorChoice("green"),
+        ColorChoice("purple"),
+        ColorChoice("yellow"),
+        ColorChoice("black")
     ]
 
     grid = []
 
     def __init__(self, size, grid = None):
         self.size = size
+        self.colors = [ColorChoice(color.name) for color in self.colors]
         if grid == None:
             self.grid = self.createBoard()
         else:
@@ -148,7 +160,10 @@ class Board():
             for j in range(self.size):
                 above_color = new_grid[i - 1][j].color.name if i > 0 else ""
                 
-                valid_colors = [color for color in self.colors if color != prev_color and color != above_color]
+                if i == self.size - 1 and j == self.size - 1:
+                    valid_colors = [color.name for color in self.colors if color.available and color.name != prev_color and color.name != above_color]
+                else:
+                    valid_colors = [color.name for color in self.colors if color.name != prev_color and color.name != above_color]
 
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color
@@ -157,8 +172,10 @@ class Board():
 
                 if i == 0 and j == 0:
                     new_tile.player = 1
+                    [color for color in self.colors if color.name == new_tile.color.name][0].available = False
                 elif i == self.size - 1 and j == self.size - 1:
                     new_tile.player = 2
+                    [color for color in self.colors if color.name == new_tile.color.name][0].available = False
 
                 row.append(new_tile)
 
@@ -168,7 +185,7 @@ class Board():
 
     def toJSON(self):
         return {"size": self.size,
-                "colors": [color for color in self.colors],
+                "colors": [color.toJSON() for color in self.colors],
                 "grid": [[tile.toJSON() for tile in row] for row in self.grid]}
 
 class Game():
