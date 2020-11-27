@@ -16,8 +16,15 @@ $(document).ready(function()
                     $("#game-container").html(response);
                     can_move = false;
 
-                    await delay(2000);
-                    aiMakeMove();
+                    if($("#player-score").data("score") + $("#computer-score").data("score") < 64)
+                    {
+                        await delay(2000);
+                        aiMakeMove();
+                    }
+                    else
+                    {
+                        console.log("game over");
+                    }
                 }
             });
         }
