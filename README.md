@@ -12,6 +12,8 @@ Choose a color on the bottom to make your move.
 
 After each choice, your square will join each of the adjacent squares that match your color. In other words, if your color is red, and you chooses blue, your cluster of squares will turn blue, and the number of blue squares adjacent to you will be added to your score.
 
+![](https://i.ibb.co/rtKw4Jz/filler.gif)
+
 The highest score after the board has been filled wins!
 
 ## Running the Flask server
