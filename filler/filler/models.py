@@ -128,6 +128,9 @@ class Game():
             player.score += 1
             self.board.grid[coords[0]][coords[1]].player = player.player_num
 
+    def aiMakeMove(self, computer):
+        self.makeMove(computer, self.determineBestMove(computer))
+
     def checkTile(self, i, j, board, player_num, coords_list):
         # check above
         if i > 0 and board.grid[i - 1][j].player == player_num:
