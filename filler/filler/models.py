@@ -157,7 +157,7 @@ class Board():
             for j in range(self.size):
                 above_color = new_grid[i - 1][j].color.name if i > 0 else ""
                 
-                valid_colors = [color for color in self.colors if color != prev_color and color != above_color]
+                valid_colors = [color.name for color in self.colors if color.name != prev_color and color.name != above_color]
 
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color
