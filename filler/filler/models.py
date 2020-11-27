@@ -47,8 +47,29 @@ class Player():
             self.score += 1
             board.grid[coords[0]][coords[1]].player = self.player_num
 
-    def aiMakeMove(self, computer):
-        self.makeMove(computer, self.determineBestMove(computer))
+    def checkTile(self, i, j, board, coords_list):
+        # check above
+        if i > 0 and board.grid[i - 1][j].player == self.player_num:
+            coords_list.append((i, j))
+        # check below
+        if i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
+            coords_list.append((i, j))
+        # check left
+        if j > 0 and board.grid[i][j - 1].player == self.player_num:
+            coords_list.append((i, j))
+        # check right
+        if j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
+            coords_list.append((i, j))
+
+    def toJSON(self):
+        return {"player_num": self.player_num,
+                "color": self.color.toJSON(),
+                "score": self.score}
+
+class Computer(Player):
+
+    def aiMakeMove(self, board):
+        super().makeMove(board, self.determineBestMove(board))
 
     def possibleMoves(self, board):
         adj_colors = {}
@@ -73,41 +94,19 @@ class Player():
     def determineBestMove(self, board):
         return Color(max(self.possibleMoves(board), key=self.possibleMoves(board).get))
 
-    def checkTile(self, i, j, board, coords_list):
-        # check above
-        if i > 0 and board.grid[i - 1][j].player == self.player_num:
-            coords_list.append((i, j))
-        # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
-            coords_list.append((i, j))
-        # check left
-        if j > 0 and board.grid[i][j - 1].player == self.player_num:
-            coords_list.append((i, j))
-        # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
-            coords_list.append((i, j))
-
     def checkAdj(self, i, j, board, coords_list):
         # check above
-        if i > 0 and board.grid[i - 1][j].player != self.player_num:
+        if i > 0 and board.grid[i - 1][j].player == 0:
             coords_list.append((i - 1, j))
         # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player != self.player_num:
+        if i < board.size - 1 and board.grid[i + 1][j].player == 0:
             coords_list.append((i + 1, j))
         # check left
-        if j > 0 and board.grid[i][j - 1].player != self.player_num:
+        if j > 0 and board.grid[i][j - 1].player == 0:
             coords_list.append((i, j - 1))
         # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player != self.player_num:
+        if j < board.size - 1 and board.grid[i][j + 1].player == 0:
             coords_list.append((i, j + 1))
-
-    def toJSON(self):
-        return {"player_num": self.player_num,
-                "color": self.color.toJSON(),
-                "score": self.score}
-
-class Computer(Player):
-    pass
 
 class Board():
     colors = [
@@ -182,11 +181,12 @@ class Game():
         
         end_loc = self.board.size - 1
         self.player_1 = Player(1, self.board.grid[0][0].color.name)
-        self.computer = Player(2, self.board.grid[end_loc][end_loc].color.name)
+        self.computer = Computer(2, self.board.grid[end_loc][end_loc].color.name)
 
     def __str__(self):
         return str(self.board)
 
     def toJSON(self):
         return {"player_1": self.player_1.toJSON(),
+                "computer": self.computer.toJSON(),
                 "board": self.board.toJSON()}
