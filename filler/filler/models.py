@@ -11,6 +11,15 @@ class Color():
     def toJSON(self):
         return {"name": self.name}
 
+class ColorChoice(Color):
+    def __init__(self, name, available = True):
+        super().__init__(name)
+        self.available = available
+
+    def toJSON(self):
+        return {"name": self.name,
+                "available": self.available}
+
 class Tile():
 
     def __init__(self, color, player):
