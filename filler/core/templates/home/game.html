@@ -1,10 +1,10 @@
 <div class="row mb space-between">
     <div class="row">
         <span>Player 1</span>
-        <span class="score {{ game.player_1.color.name }}">{{ game.player_1.score }}</span>
+        <span id="player-score" class="score {{ game.player_1.color.name }}" data-score="{{ game.player_1.score }}">{{ game.player_1.score }}</span>
     </div>
     <div class="row">
-        <span class="score {{ game.computer.color.name }}">{{ game.computer.score }}</span>
+        <span id="computer-score" class="score {{ game.computer.color.name }}" data-score="{{ game.computer.score }}">{{ game.computer.score }}</span>
         <span>Computer</span>
     </div>
 </div>
