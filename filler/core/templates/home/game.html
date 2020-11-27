@@ -9,6 +9,7 @@
     </div>
 </div>
 <div class="game-board drop-shadow">
+    {% include "home/gameover.html" %}
     {% for row in game.board.grid %}
     <div class="row">
         {% for tile in row %}
