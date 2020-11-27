@@ -42,7 +42,15 @@ function aiMakeMove()
         success: async function(response)
         {
             $("#game-container").html(response);
-            can_move = true;
+
+            if($("#player-score").data("score") + $("#computer-score").data("score") < 64)
+            {
+                can_move = true;
+            }
+            else
+            {
+                console.log("game over");
+            }
         }
     });
 }
