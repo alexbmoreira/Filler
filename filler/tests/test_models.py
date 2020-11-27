@@ -167,12 +167,12 @@ class TestGame(unittest.TestCase):
                                                     })
 
     def test_possibleMoves(self):
-        test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
-                    [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
-                    [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
+        test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 2)],
+                    [Tile("yellow", 0), Tile("purple", 0), Tile("red", 2)],
+                    [Tile("black", 0), Tile("red", 2), Tile("red", 2)]]
         test_game = Game(test_board)
 
-        self.assertEqual(test_game.computer.possibleMoves(test_game.board), {'green': 1, 'blue': 1})
+        self.assertEqual(test_game.computer.possibleMoves(test_game.board), {'black': 1, 'blue': 1, 'purple': 1})
 
     def test_makeThenFindPossible(self):
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],

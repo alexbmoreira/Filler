@@ -89,8 +89,8 @@ class Computer(Player):
         for i in range(board.size):
             for j in range(board.size):
                 tile = board.grid[i][j]
-                if tile.player == self.player_num:
-                    self.checkAdj(i, j, board, adj_coords)
+                if tile.player == 0:
+                    self.checkTile(i, j, board, adj_coords)
 
         while len(adj_coords) > 0:
             coords = adj_coords.pop(0)
@@ -104,20 +104,6 @@ class Computer(Player):
 
     def determineBestMove(self, board):
         return Color(max(self.possibleMoves(board), key=self.possibleMoves(board).get))
-
-    def checkAdj(self, i, j, board, coords_list):
-        # check above
-        if i > 0 and board.grid[i - 1][j].player == 0:
-            coords_list.append((i - 1, j))
-        # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player == 0:
-            coords_list.append((i + 1, j))
-        # check left
-        if j > 0 and board.grid[i][j - 1].player == 0:
-            coords_list.append((i, j - 1))
-        # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player == 0:
-            coords_list.append((i, j + 1))
 
 class Board():
     colors = [
