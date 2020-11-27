@@ -106,6 +106,9 @@ class Player():
                 "color": self.color.toJSON(),
                 "score": self.score}
 
+class Computer(Player):
+    pass
+
 class Board():
     colors = [
         "red",
@@ -177,7 +180,9 @@ class Game():
         else:
             self.board = Board(3, board)
         
+        end_loc = self.board.size - 1
         self.player_1 = Player(1, self.board.grid[0][0].color.name)
+        self.computer = Player(2, self.board.grid[end_loc][end_loc].color.name)
 
     def __str__(self):
         return str(self.board)
