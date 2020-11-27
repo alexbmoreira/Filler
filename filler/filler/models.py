@@ -50,7 +50,7 @@ class Player():
                 if tile.player == self.player_num:
                     tile.color = color
 
-                if tile.player == 0 and tile.color.name == color.name:
+                if tile.player == 0 and tile.color.name == color.name and (i, j) not in change_tiles:
                     self.checkTile(i, j, board, change_tiles)
                 
         while len(change_tiles) > 0:
@@ -63,13 +63,13 @@ class Player():
         if i > 0 and board.grid[i - 1][j].player == self.player_num:
             coords_list.append((i, j))
         # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
+        elif i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
             coords_list.append((i, j))
         # check left
-        if j > 0 and board.grid[i][j - 1].player == self.player_num:
+        elif j > 0 and board.grid[i][j - 1].player == self.player_num:
             coords_list.append((i, j))
         # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
+        elif j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
             coords_list.append((i, j))
 
     def toJSON(self):
