@@ -25,7 +25,14 @@ class TestBoard(unittest.TestCase):
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
 
         self.assertEqual(Board(3, test_board).toJSON(), {'size': 3,
-                                                        'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                        'colors': [
+                                                            {'name': 'red', 'available': True},
+                                                            {'name': 'blue', 'available': True},
+                                                            {'name': 'green', 'available': True},
+                                                            {'name': 'purple', 'available': True},
+                                                            {'name': 'yellow', 'available': True},
+                                                            {'name': 'black', 'available': True}
+                                                            ],
                                                         'grid': [
                                                             [
                                                                 {'player': 1, 'color': {'name': 'black'}},
@@ -55,7 +62,14 @@ class TestGame(unittest.TestCase):
                                                     'computer': {'player_num': 2, 'color': {'name': 'red'}, 'score': 1},
                                                     'board': {
                                                             'size': 3,
-                                                            'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                            'colors': [
+                                                            {'name': 'red', 'available': True},
+                                                            {'name': 'blue', 'available': True},
+                                                            {'name': 'green', 'available': True},
+                                                            {'name': 'purple', 'available': True},
+                                                            {'name': 'yellow', 'available': True},
+                                                            {'name': 'black', 'available': True}
+                                                            ],
                                                             'grid': [
                                                                 [
                                                                     {'player': 1, 'color': {'name': 'black'}},
@@ -86,7 +100,14 @@ class TestGame(unittest.TestCase):
                                                 'computer': {'player_num': 2, 'color': {'name': 'red'}, 'score': 1},
                                                 'board': {
                                                         'size': 3,
-                                                        'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                        'colors': [
+                                                            {'name': 'red', 'available': True},
+                                                            {'name': 'blue', 'available': True},
+                                                            {'name': 'green', 'available': True},
+                                                            {'name': 'purple', 'available': True},
+                                                            {'name': 'yellow', 'available': True},
+                                                            {'name': 'black', 'available': True}
+                                                            ],
                                                         'grid': [
                                                             [
                                                                 {'player': 1, 'color': {'name': 'blue'}},
@@ -118,7 +139,14 @@ class TestGame(unittest.TestCase):
                                                 'computer': {'player_num': 2, 'color': {'name': 'red'}, 'score': 1},
                                                 'board': {
                                                         'size': 3,
-                                                        'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                        'colors': [
+                                                            {'name': 'red', 'available': True},
+                                                            {'name': 'blue', 'available': True},
+                                                            {'name': 'green', 'available': True},
+                                                            {'name': 'purple', 'available': True},
+                                                            {'name': 'yellow', 'available': True},
+                                                            {'name': 'black', 'available': True}
+                                                            ],
                                                         'grid': [
                                                             [
                                                                 {'player': 1, 'color': {'name': 'yellow'}},
@@ -176,7 +204,14 @@ class TestGame(unittest.TestCase):
                                                 'computer': {'player_num': 2, 'color': {'name': 'purple'}, 'score': 4},
                                                 'board': {
                                                         'size': 3,
-                                                        'colors': ['red', 'blue', 'green', 'purple', 'yellow', 'black'],
+                                                        'colors': [
+                                                            {'name': 'red', 'available': True},
+                                                            {'name': 'blue', 'available': True},
+                                                            {'name': 'green', 'available': True},
+                                                            {'name': 'purple', 'available': True},
+                                                            {'name': 'yellow', 'available': True},
+                                                            {'name': 'black', 'available': True}
+                                                            ],
                                                         'grid': [
                                                             [
                                                                 {'player': 1, 'color': {'name': 'black'}},

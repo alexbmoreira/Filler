@@ -119,12 +119,12 @@ class Computer(Player):
 
 class Board():
     colors = [
-        "red",
-        "blue",
-        "green",
-        "purple",
-        "yellow",
-        "black"
+        ColorChoice("red"),
+        ColorChoice("blue"),
+        ColorChoice("green"),
+        ColorChoice("purple"),
+        ColorChoice("yellow"),
+        ColorChoice("black")
     ]
 
     grid = []
@@ -177,7 +177,7 @@ class Board():
 
     def toJSON(self):
         return {"size": self.size,
-                "colors": [color for color in self.colors],
+                "colors": [color.toJSON() for color in self.colors],
                 "grid": [[tile.toJSON() for tile in row] for row in self.grid]}
 
 class Game():
