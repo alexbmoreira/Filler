@@ -60,13 +60,19 @@ function showOutcome()
     if($("#player-score").data("score") < $("#computer-score").data("score"))
     {
         $("#game-over").removeClass("hidden");
+        $("#outcome").addClass("loss");
+        $("#outcome-text").text("You Lost!");
     }
-    if($("#player-score").data("score") > $("#computer-score").data("score"))
+    else if($("#player-score").data("score") > $("#computer-score").data("score"))
     {
         $("#game-over").removeClass("hidden");
+        $("#outcome").addClass("win");
+        $("#outcome-text").text("You Won!");
     }
     else
     {
         $("#game-over").removeClass("hidden");
+        $("#outcome").addClass("draw");
+        $("#outcome-text").text("Draw!");
     }
 }

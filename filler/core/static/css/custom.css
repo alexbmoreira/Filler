@@ -8,6 +8,10 @@
 	--red-tile: #ca2626;
 	--yellow-tile: #fcee32;
 
+	--win: #f7f72c;
+	--loss: #b82f2f;
+	--draw: #9dc9d8;
+
 	--drop-shadow: drop-shadow(0px 0px 10px #aaaaaa);
 	--outcome-shadow: drop-shadow(0px 0px 10px #2b2b2b);
 }
@@ -111,10 +115,14 @@ body {
 	}
 }
 .outcome.win {
-	background-color: yellow;
+	background-color: var(--win);
 	color: black;
 }
 .outcome.loss {
-	background-color: red;
+	background-color: var(--loss);
 	color: white;
+}
+.outcome.draw {
+	background-color: var(--draw);
+	color: black;
 }
