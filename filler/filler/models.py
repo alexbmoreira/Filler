@@ -142,6 +142,20 @@ class Game():
         if j < board.size - 1 and board.grid[i][j + 1].player == player_num:
             change_tiles.append((i, j))
 
+    def determineBestMove(self, player):
+        adj_colors = {}
+
+        for i in range(self.board.size):
+            for j in range(self.board.size):
+                tile = self.board.grid[i][j]
+                if tile.player == player.player_num:
+                    if tile.color.name in adj_colors:
+                        adj_colors[tile.color.name] += 1
+                    else:
+                        adj_colors[tile.color.name] = 1
+
+        return adj_colors
+
     def toJSON(self):
         return {"player_1": self.player_1.toJSON(),
                 "board": self.board.toJSON()}

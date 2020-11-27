@@ -135,5 +135,13 @@ class TestGame(unittest.TestCase):
                                                         ]}
                                                     })
 
+    def test_determineMove(self):
+        test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
+                    [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
+                    [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
+        test_game = Game(test_board)
+
+        self.assertEqual(test_game.determineBestMove(test_game.player_1), {'black': 1})
+
 if __name__ == '__main__':
     unittest.main()
