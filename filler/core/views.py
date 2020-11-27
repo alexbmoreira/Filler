@@ -1,7 +1,7 @@
-from flask import make_response, render_template, jsonify, request, session, redirect, url_for
-from . import app
-
+from flask import Flask, make_response, render_template, jsonify, request, session, redirect, url_for
 from ..filler.models import Game, Color
+
+app = Flask(__name__)
 
 game = None
 
