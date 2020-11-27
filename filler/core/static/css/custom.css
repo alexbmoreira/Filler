@@ -20,6 +20,12 @@ body {
 	font-family: "Arvo", serif;
 	background-color: #e6e6e6;
 }
+h2, h3 {
+	margin: 0;
+}
+a {
+	text-decoration: none;
+}
 .hidden {
 	visibility: hidden;
 }
@@ -100,7 +106,7 @@ body {
 }
 
 .outcome {
-	padding: 0 5px;
+	padding: 5px 10px;
 	border-radius: 0.25em;
 	filter: var(--outcome-shadow);
 	transform: scale(100%);
@@ -125,4 +131,35 @@ body {
 .outcome.draw {
 	background-color: var(--draw);
 	color: black;
+}
+
+.play-again {
+	cursor: pointer;
+	margin-top: 10px;
+	font-size: 2em;
+	color: white;
+	filter: var(--outcome-shadow);
+}
+.play-again-box{
+	border-radius: 0.25em;
+	background-color: white;
+	color: #a1a1a1;
+	font-size: 0.5em;
+	padding: 3px 6px;
+}
+.new-game-arrow {
+	animation: new-game-out 0.5s 1;
+	animation-fill-mode: forwards;
+}
+.new-game-arrow:hover {
+	animation: new-game-in 0.5s 1;
+	animation-fill-mode: forwards;
+}
+@keyframes new-game-in {
+	from { transform: rotate(20deg); }
+	to { transform: rotate(-20deg); }
+}
+@keyframes new-game-out {
+	from { transform: rotate(-20deg); }
+	to { transform: rotate(20deg); }
 }
