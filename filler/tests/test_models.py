@@ -141,7 +141,7 @@ class TestGame(unittest.TestCase):
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
 
-        self.assertEqual(test_game.determineBestMove(test_game.player_1), {'blue': 1, 'yellow': 1})
+        self.assertEqual(test_game.possibleMoves(test_game.player_1), {'blue': 1, 'yellow': 1})
 
     def test_makeThenDetermineNext(self):
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
@@ -150,7 +150,7 @@ class TestGame(unittest.TestCase):
         test_game = Game(test_board)
         test_game.makeMove(test_game.player_1, Color('blue'))
 
-        self.assertEqual(test_game.determineBestMove(test_game.player_1), {'red': 1, 'yellow': 1, 'purple': 1})
+        self.assertEqual(test_game.possibleMoves(test_game.player_1), {'red': 1, 'yellow': 1, 'purple': 1})
 
 if __name__ == '__main__':
     unittest.main()

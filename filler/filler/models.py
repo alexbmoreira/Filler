@@ -143,6 +143,9 @@ class Game():
             coords_list.append((i, j))
 
     def determineBestMove(self, player):
+        pass
+
+    def possibleMoves(self, player):
         adj_colors = {}
         adj_coords = []
 
@@ -161,7 +164,6 @@ class Game():
                 adj_colors[tile.color.name] = 1
 
         return adj_colors
-
 
     def checkAdj(self, i, j, board, player_num, coords_list):
         # check above
