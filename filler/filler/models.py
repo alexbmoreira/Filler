@@ -131,6 +131,7 @@ class Board():
 
     def __init__(self, size, grid = None):
         self.size = size
+        self.colors = [ColorChoice(color.name) for color in self.colors]
         if grid == None:
             self.grid = self.createBoard()
         else:
@@ -157,8 +158,11 @@ class Board():
             for j in range(self.size):
                 above_color = new_grid[i - 1][j].color.name if i > 0 else ""
                 
-                valid_colors = [color.name for color in self.colors if color.name != prev_color and color.name != above_color]
-
+                if i == self.size - 1 and j == self.size - 1:
+                    valid_colors = [color.name for color in self.colors if color.name != prev_color and color.name != above_color and color.available == True]
+                else:
+                    valid_colors = [color.name for color in self.colors if color.name != prev_color and color.name != above_color]
+                    
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color
 
@@ -166,8 +170,10 @@ class Board():
 
                 if i == 0 and j == 0:
                     new_tile.player = 1
+                    [color for color in self.colors if color.name == new_tile.color.name][0].available = False
                 elif i == self.size - 1 and j == self.size - 1:
                     new_tile.player = 2
+                    [color for color in self.colors if color.name == new_tile.color.name][0].available = False
 
                 row.append(new_tile)
 
