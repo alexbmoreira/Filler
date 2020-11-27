@@ -143,7 +143,7 @@ class Game():
             coords_list.append((i, j))
 
     def determineBestMove(self, player):
-        pass
+        return max(self.possibleMoves(player), key=self.possibleMoves(player).get)
 
     def possibleMoves(self, player):
         adj_colors = {}
