@@ -18,3 +18,10 @@ def make_move():
     game.player_1.makeMove(game.board, color)
 
     return render_template("home/game.html", game=game.toJSON())
+
+@app.route('/ai-make-move')
+def ai_make_move():
+    global game
+    game.computer.aiMakeMove(game.board)
+
+    return render_template("home/game.html", game=game.toJSON())

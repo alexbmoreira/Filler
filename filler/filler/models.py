@@ -89,7 +89,7 @@ class Computer(Player):
         for i in range(board.size):
             for j in range(board.size):
                 tile = board.grid[i][j]
-                if tile.player == 0:
+                if tile.player == 0 and [color for color in board.colors if color.name == tile.color.name][0].available == True:
                     self.checkTile(i, j, board, adj_coords)
 
         while len(adj_coords) > 0:
@@ -99,6 +99,10 @@ class Computer(Player):
                 adj_colors[tile.color.name] += 1
             else:
                 adj_colors[tile.color.name] = 1
+
+        for color in board.colors:
+            if color.available == True and color.name not in adj_colors:
+                adj_colors[color.name] = 0
 
         return adj_colors
 
