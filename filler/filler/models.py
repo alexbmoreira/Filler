@@ -50,23 +50,6 @@ class Player():
     def aiMakeMove(self, computer):
         self.makeMove(computer, self.determineBestMove(computer))
 
-    def checkTile(self, i, j, board, coords_list):
-        # check above
-        if i > 0 and board.grid[i - 1][j].player == self.player_num:
-            coords_list.append((i, j))
-        # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
-            coords_list.append((i, j))
-        # check left
-        if j > 0 and board.grid[i][j - 1].player == self.player_num:
-            coords_list.append((i, j))
-        # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
-            coords_list.append((i, j))
-
-    def determineBestMove(self, board):
-        return Color(max(self.possibleMoves(board), key=self.possibleMoves(board).get))
-
     def possibleMoves(self, board):
         adj_colors = {}
         adj_coords = []
@@ -86,6 +69,23 @@ class Player():
                 adj_colors[tile.color.name] = 1
 
         return adj_colors
+
+    def determineBestMove(self, board):
+        return Color(max(self.possibleMoves(board), key=self.possibleMoves(board).get))
+
+    def checkTile(self, i, j, board, coords_list):
+        # check above
+        if i > 0 and board.grid[i - 1][j].player == self.player_num:
+            coords_list.append((i, j))
+        # check below
+        if i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
+            coords_list.append((i, j))
+        # check left
+        if j > 0 and board.grid[i][j - 1].player == self.player_num:
+            coords_list.append((i, j))
+        # check right
+        if j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
+            coords_list.append((i, j))
 
     def checkAdj(self, i, j, board, coords_list):
         # check above
