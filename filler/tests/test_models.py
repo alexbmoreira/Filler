@@ -79,7 +79,7 @@ class TestGame(unittest.TestCase):
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
-        test_game.makeMove(test_game.player_1, Color('blue'))
+        test_game.player_1.makeMove(test_game.board, Color('blue'))
 
         self.assertEqual(test_game.toJSON(), {'player_1': {'player_num': 1, 'color': {'name': 'blue'}, 'score': 2},
                                                 'board': {
@@ -109,8 +109,8 @@ class TestGame(unittest.TestCase):
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
-        test_game.makeMove(test_game.player_1, Color('blue'))
-        test_game.makeMove(test_game.player_1, Color('yellow'))
+        test_game.player_1.makeMove(test_game.board, Color('blue'))
+        test_game.player_1.makeMove(test_game.board, Color('yellow'))
 
         self.assertEqual(test_game.toJSON(), {'player_1': {'player_num': 1, 'color': {'name': 'yellow'}, 'score': 3},
                                                 'board': {
@@ -141,16 +141,16 @@ class TestGame(unittest.TestCase):
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
 
-        self.assertEqual(test_game.possibleMoves(test_game.player_1), {'blue': 1, 'yellow': 1})
+        self.assertEqual(test_game.player_1.possibleMoves(test_game.board), {'blue': 1, 'yellow': 1})
 
     def test_makeThenFindPossible(self):
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
-        test_game.makeMove(test_game.player_1, Color('blue'))
+        test_game.player_1.makeMove(test_game.board, Color('blue'))
 
-        self.assertEqual(test_game.possibleMoves(test_game.player_1), {'red': 1, 'yellow': 1, 'purple': 1})
+        self.assertEqual(test_game.player_1.possibleMoves(test_game.board), {'red': 1, 'yellow': 1, 'purple': 1})
     
     def test_determineBest(self):
         test_board = [[Tile("black", 1), Tile("black", 1), Tile("yellow", 0)],
@@ -158,14 +158,14 @@ class TestGame(unittest.TestCase):
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
 
-        self.assertEqual(test_game.determineBestMove(test_game.player_1).toJSON(), {'name': 'yellow'})
+        self.assertEqual(test_game.player_1.determineBestMove(test_game.board).toJSON(), {'name': 'yellow'})
     
     def test_aiMoveMaking(self):
         test_board = [[Tile("black", 1), Tile("black", 1), Tile("yellow", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
-        test_game.aiMakeMove(test_game.player_1)
+        test_game.player_1.aiMakeMove(test_game.board)
 
         self.assertEqual(test_game.toJSON(), {'player_1': {'player_num': 1, 'color': {'name': 'yellow'}, 'score': 3},
                                                 'board': {

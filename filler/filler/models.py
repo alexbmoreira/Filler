@@ -28,6 +28,79 @@ class Player():
         self.color = Color(color)
         self.score = score
 
+    def makeMove(self, board, color):
+        change_tiles = []
+        self.color = color
+
+        for i in range(board.size):
+            for j in range(board.size):
+                tile = board.grid[i][j]
+
+                if tile.player == self.player_num:
+                    tile.color = color
+
+                if tile.player == 0 and tile.color.name == color.name:
+                    self.checkTile(i, j, board, change_tiles)
+                
+        while len(change_tiles) > 0:
+            coords = change_tiles.pop(0)
+            self.score += 1
+            board.grid[coords[0]][coords[1]].player = self.player_num
+
+    def aiMakeMove(self, computer):
+        self.makeMove(computer, self.determineBestMove(computer))
+
+    def checkTile(self, i, j, board, coords_list):
+        # check above
+        if i > 0 and board.grid[i - 1][j].player == self.player_num:
+            coords_list.append((i, j))
+        # check below
+        if i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
+            coords_list.append((i, j))
+        # check left
+        if j > 0 and board.grid[i][j - 1].player == self.player_num:
+            coords_list.append((i, j))
+        # check right
+        if j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
+            coords_list.append((i, j))
+
+    def determineBestMove(self, board):
+        return Color(max(self.possibleMoves(board), key=self.possibleMoves(board).get))
+
+    def possibleMoves(self, board):
+        adj_colors = {}
+        adj_coords = []
+
+        for i in range(board.size):
+            for j in range(board.size):
+                tile = board.grid[i][j]
+                if tile.player == self.player_num:
+                    self.checkAdj(i, j, board, adj_coords)
+
+        while len(adj_coords) > 0:
+            coords = adj_coords.pop(0)
+            tile = board.grid[coords[0]][coords[1]]
+            if tile.color.name in adj_colors:
+                adj_colors[tile.color.name] += 1
+            else:
+                adj_colors[tile.color.name] = 1
+
+        return adj_colors
+
+    def checkAdj(self, i, j, board, coords_list):
+        # check above
+        if i > 0 and board.grid[i - 1][j].player != self.player_num:
+            coords_list.append((i - 1, j))
+        # check below
+        if i < board.size - 1 and board.grid[i + 1][j].player != self.player_num:
+            coords_list.append((i + 1, j))
+        # check left
+        if j > 0 and board.grid[i][j - 1].player != self.player_num:
+            coords_list.append((i, j - 1))
+        # check right
+        if j < board.size - 1 and board.grid[i][j + 1].player != self.player_num:
+            coords_list.append((i, j + 1))
+
     def toJSON(self):
         return {"player_num": self.player_num,
                 "color": self.color.toJSON(),
@@ -108,79 +181,6 @@ class Game():
 
     def __str__(self):
         return str(self.board)
-
-    def makeMove(self, player, color):
-        change_tiles = []
-        player.color = color
-
-        for i in range(self.board.size):
-            for j in range(self.board.size):
-                tile = self.board.grid[i][j]
-
-                if tile.player == player.player_num:
-                    tile.color = color
-
-                if tile.player == 0 and tile.color.name == color.name:
-                    self.checkTile(i, j, self.board, player.player_num, change_tiles)
-                
-        while len(change_tiles) > 0:
-            coords = change_tiles.pop(0)
-            player.score += 1
-            self.board.grid[coords[0]][coords[1]].player = player.player_num
-
-    def aiMakeMove(self, computer):
-        self.makeMove(computer, self.determineBestMove(computer))
-
-    def checkTile(self, i, j, board, player_num, coords_list):
-        # check above
-        if i > 0 and board.grid[i - 1][j].player == player_num:
-            coords_list.append((i, j))
-        # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player == player_num:
-            coords_list.append((i, j))
-        # check left
-        if j > 0 and board.grid[i][j - 1].player == player_num:
-            coords_list.append((i, j))
-        # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player == player_num:
-            coords_list.append((i, j))
-
-    def determineBestMove(self, player):
-        return Color(max(self.possibleMoves(player), key=self.possibleMoves(player).get))
-
-    def possibleMoves(self, player):
-        adj_colors = {}
-        adj_coords = []
-
-        for i in range(self.board.size):
-            for j in range(self.board.size):
-                tile = self.board.grid[i][j]
-                if tile.player == player.player_num:
-                    self.checkAdj(i, j, self.board, player.player_num, adj_coords)
-
-        while len(adj_coords) > 0:
-            coords = adj_coords.pop(0)
-            tile = self.board.grid[coords[0]][coords[1]]
-            if tile.color.name in adj_colors:
-                adj_colors[tile.color.name] += 1
-            else:
-                adj_colors[tile.color.name] = 1
-
-        return adj_colors
-
-    def checkAdj(self, i, j, board, player_num, coords_list):
-        # check above
-        if i > 0 and board.grid[i - 1][j].player != player_num:
-            coords_list.append((i - 1, j))
-        # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player != player_num:
-            coords_list.append((i + 1, j))
-        # check left
-        if j > 0 and board.grid[i][j - 1].player != player_num:
-            coords_list.append((i, j - 1))
-        # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player != player_num:
-            coords_list.append((i, j + 1))
 
     def toJSON(self):
         return {"player_1": self.player_1.toJSON(),
