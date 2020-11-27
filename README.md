@@ -4,7 +4,7 @@ A filler game played against a computer.
 
 ## How to play
 
-The goal is to fill as much of your board as you can.
+The goal is to fill as much of the board as you can.
 
 You and the computer will wach start with one square in the top left and bottom right corners, respectively.
 
