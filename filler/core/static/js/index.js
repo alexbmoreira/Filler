@@ -18,12 +18,12 @@ $(document).ready(function()
 
                     if($("#player-score").data("score") + $("#computer-score").data("score") < 64)
                     {
-                        await delay(2000);
+                        await delay(1000);
                         aiMakeMove();
                     }
                     else
                     {
-                        console.log("game over");
+                        showOutcome();
                     }
                 }
             });
@@ -49,8 +49,24 @@ function aiMakeMove()
             }
             else
             {
-                console.log("game over");
+                showOutcome();
             }
         }
     });
+}
+
+function showOutcome()
+{
+    if($("#player-score").data("score") < $("#computer-score").data("score"))
+    {
+        $("#game-over").removeClass("hidden");
+    }
+    if($("#player-score").data("score") > $("#computer-score").data("score"))
+    {
+        $("#game-over").removeClass("hidden");
+    }
+    else
+    {
+        $("#game-over").removeClass("hidden");
+    }
 }
