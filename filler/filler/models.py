@@ -165,16 +165,16 @@ class Game():
 
     def checkAdj(self, i, j, board, player_num, coords_list):
         # check above
-        if i > 0:
+        if i > 0 and board.grid[i - 1][j].player != player_num:
             coords_list.append((i - 1, j))
         # check below
-        if i < board.size - 1:
+        if i < board.size - 1 and board.grid[i + 1][j].player != player_num:
             coords_list.append((i + 1, j))
         # check left
-        if j > 0:
+        if j > 0 and board.grid[i][j - 1].player != player_num:
             coords_list.append((i, j - 1))
         # check right
-        if j < board.size - 1:
+        if j < board.size - 1 and board.grid[i][j + 1].player != player_num:
             coords_list.append((i, j + 1))
 
     def toJSON(self):
