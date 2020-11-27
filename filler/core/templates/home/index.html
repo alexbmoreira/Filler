@@ -35,7 +35,7 @@
         </div>
         <div class="row mt space-between vertical-align">
             {% for color in game.board.colors %}
-            <div class="option-tile  {{ color.name }} {{ 'invalid' if not color.available else '' }}"></div>
+            <div class="option-tile  {{ color.name }} {{ 'invalid' if not color.available else 'valid' }}" data-color="{{ color.name }}"></div>
             {% endfor %}
         </div>
     </div>
