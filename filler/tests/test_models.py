@@ -158,7 +158,7 @@ class TestGame(unittest.TestCase):
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
         test_game = Game(test_board)
 
-        self.assertEqual(test_game.determineBestMove(test_game.player_1), 'yellow')
+        self.assertEqual(test_game.determineBestMove(test_game.player_1).toJSON(), {'name': 'yellow'})
 
 if __name__ == '__main__':
     unittest.main()
