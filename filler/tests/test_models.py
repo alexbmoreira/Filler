@@ -102,7 +102,7 @@ class TestGame(unittest.TestCase):
                                                         'size': 3,
                                                         'colors': [
                                                             {'name': 'red', 'available': True},
-                                                            {'name': 'blue', 'available': True},
+                                                            {'name': 'blue', 'available': False},
                                                             {'name': 'green', 'available': True},
                                                             {'name': 'purple', 'available': True},
                                                             {'name': 'yellow', 'available': True},
@@ -144,7 +144,7 @@ class TestGame(unittest.TestCase):
                                                             {'name': 'blue', 'available': True},
                                                             {'name': 'green', 'available': True},
                                                             {'name': 'purple', 'available': True},
-                                                            {'name': 'yellow', 'available': True},
+                                                            {'name': 'yellow', 'available': False},
                                                             {'name': 'black', 'available': True}
                                                             ],
                                                         'grid': [
@@ -208,7 +208,7 @@ class TestGame(unittest.TestCase):
                                                             {'name': 'red', 'available': True},
                                                             {'name': 'blue', 'available': True},
                                                             {'name': 'green', 'available': True},
-                                                            {'name': 'purple', 'available': True},
+                                                            {'name': 'purple', 'available': False},
                                                             {'name': 'yellow', 'available': True},
                                                             {'name': 'black', 'available': True}
                                                             ],

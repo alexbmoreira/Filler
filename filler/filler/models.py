@@ -39,7 +39,9 @@ class Player():
 
     def makeMove(self, board, color):
         change_tiles = []
+        [color for color in board.colors if color.name == self.color.name][0].available = True
         self.color = color
+        [color for color in board.colors if color.name == self.color.name][0].available = False
 
         for i in range(board.size):
             for j in range(board.size):
@@ -159,10 +161,10 @@ class Board():
                 above_color = new_grid[i - 1][j].color.name if i > 0 else ""
                 
                 if i == self.size - 1 and j == self.size - 1:
-                    valid_colors = [color.name for color in self.colors if color.name != prev_color and color.name != above_color and color.available == True]
+                    valid_colors = [color.name for color in self.colors if color.available and color.name != prev_color and color.name != above_color]
                 else:
                     valid_colors = [color.name for color in self.colors if color.name != prev_color and color.name != above_color]
-                    
+
                 add_color = valid_colors[random.randint(0, len(valid_colors) - 1)]
                 prev_color = add_color
 
