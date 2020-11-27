@@ -17,4 +17,4 @@ def make_move():
     color = Color(request.form["color"])
     game.player_1.makeMove(game.board, color)
 
-    return render_template("home/index.html", game=game.toJSON())
+    return render_template("home/game.html", game=game.toJSON())

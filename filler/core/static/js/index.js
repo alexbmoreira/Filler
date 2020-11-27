@@ -9,7 +9,8 @@ $(document).ready(function()
             url: "/make-move",
             success: function(response)
             {
-                console.log("hi");
+                $("#game-container").html(response);
+                console.log(response);
             }
         });
     });

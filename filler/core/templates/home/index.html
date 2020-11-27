@@ -13,31 +13,8 @@
 {% block main %}
 <div class="container center">
     <h1>Filler</h1>
-    <div class="game-container">
-        <div class="row mb space-between">
-            <div class="row">
-                <span>Player 1</span>
-                <span class="score {{ game.player_1.color.name }}">{{ game.player_1.score }}</span>
-            </div>
-            <div class="row">
-                <span class="score {{ game.computer.color.name }}">{{ game.computer.score }}</span>
-                <span>Computer</span>
-            </div>
-        </div>
-        <div class="game-board drop-shadow">
-            {% for row in game.board.grid %}
-            <div class="row">
-                {% for tile in row %}
-                <div class="tile {{ 'player' if tile.player == 1 else '' }}  {{ tile.color.name }}" data-tile="{{ tile }}"></div>
-                {% endfor %}
-            </div>
-            {% endfor %}
-        </div>
-        <div class="row mt space-between vertical-align">
-            {% for color in game.board.colors %}
-            <div class="option-tile  {{ color.name }} {{ 'invalid' if not color.available else 'valid' }}" data-color="{{ color.name }}"></div>
-            {% endfor %}
-        </div>
+    <div id="game-container" class="game-container">
+    {% include "home/game.html" %}
     </div>
 </div>
     
