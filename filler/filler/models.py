@@ -9,7 +9,7 @@ class Color():
         return self.name
         
     def toJSON(self):
-        return {"name": self.name}
+        return {'name': self.name}
 
 class ColorChoice(Color):
     def __init__(self, name, available = True):
@@ -17,8 +17,8 @@ class ColorChoice(Color):
         self.available = available
 
     def toJSON(self):
-        return {"name": self.name,
-                "available": self.available}
+        return {'name': self.name,
+                'available': self.available}
 
 class Tile():
 
@@ -27,8 +27,8 @@ class Tile():
         self.color = Color(color)
 
     def toJSON(self):
-        return {"player": self.player,
-                "color": self.color.toJSON()}
+        return {'player': self.player,
+                'color': self.color.toJSON()}
 
 class Player():
 
@@ -73,9 +73,9 @@ class Player():
             coords_list.append((i, j))
 
     def toJSON(self):
-        return {"player_num": self.player_num,
-                "color": self.color.toJSON(),
-                "score": self.score}
+        return {'player_num': self.player_num,
+                'color': self.color.toJSON(),
+                'score': self.score}
 
 class Computer(Player):
 
@@ -184,9 +184,9 @@ class Board():
         return new_grid
 
     def toJSON(self):
-        return {"size": self.size,
-                "colors": [color.toJSON() for color in self.colors],
-                "grid": [[tile.toJSON() for tile in row] for row in self.grid]}
+        return {'size': self.size,
+                'colors': [color.toJSON() for color in self.colors],
+                'grid': [[tile.toJSON() for tile in row] for row in self.grid]}
 
 class Game():
 
@@ -204,6 +204,6 @@ class Game():
         return str(self.board)
 
     def toJSON(self):
-        return {"player_1": self.player_1.toJSON(),
-                "computer": self.computer.toJSON(),
-                "board": self.board.toJSON()}
+        return {'player_1': self.player_1.toJSON(),
+                'computer': self.computer.toJSON(),
+                'board': self.board.toJSON()}
