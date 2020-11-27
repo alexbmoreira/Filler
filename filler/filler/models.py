@@ -9,7 +9,7 @@ class Color():
         return self.name
         
     def toJSON(self):
-        return {"name": self.name}
+        return {'name': self.name}
 
 class ColorChoice(Color):
     def __init__(self, name, available = True):
@@ -17,8 +17,8 @@ class ColorChoice(Color):
         self.available = available
 
     def toJSON(self):
-        return {"name": self.name,
-                "available": self.available}
+        return {'name': self.name,
+                'available': self.available}
 
 class Tile():
 
@@ -27,8 +27,8 @@ class Tile():
         self.color = Color(color)
 
     def toJSON(self):
-        return {"player": self.player,
-                "color": self.color.toJSON()}
+        return {'player': self.player,
+                'color': self.color.toJSON()}
 
 class Player():
 
@@ -50,7 +50,7 @@ class Player():
                 if tile.player == self.player_num:
                     tile.color = color
 
-                if tile.player == 0 and tile.color.name == color.name:
+                if tile.player == 0 and tile.color.name == color.name and (i, j) not in change_tiles:
                     self.checkTile(i, j, board, change_tiles)
                 
         while len(change_tiles) > 0:
@@ -63,19 +63,19 @@ class Player():
         if i > 0 and board.grid[i - 1][j].player == self.player_num:
             coords_list.append((i, j))
         # check below
-        if i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
+        elif i < board.size - 1 and board.grid[i + 1][j].player == self.player_num:
             coords_list.append((i, j))
         # check left
-        if j > 0 and board.grid[i][j - 1].player == self.player_num:
+        elif j > 0 and board.grid[i][j - 1].player == self.player_num:
             coords_list.append((i, j))
         # check right
-        if j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
+        elif j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
             coords_list.append((i, j))
 
     def toJSON(self):
-        return {"player_num": self.player_num,
-                "color": self.color.toJSON(),
-                "score": self.score}
+        return {'player_num': self.player_num,
+                'color': self.color.toJSON(),
+                'score': self.score}
 
 class Computer(Player):
 
@@ -184,9 +184,9 @@ class Board():
         return new_grid
 
     def toJSON(self):
-        return {"size": self.size,
-                "colors": [color.toJSON() for color in self.colors],
-                "grid": [[tile.toJSON() for tile in row] for row in self.grid]}
+        return {'size': self.size,
+                'colors': [color.toJSON() for color in self.colors],
+                'grid': [[tile.toJSON() for tile in row] for row in self.grid]}
 
 class Game():
 
@@ -204,6 +204,6 @@ class Game():
         return str(self.board)
 
     def toJSON(self):
-        return {"player_1": self.player_1.toJSON(),
-                "computer": self.computer.toJSON(),
-                "board": self.board.toJSON()}
+        return {'player_1': self.player_1.toJSON(),
+                'computer': self.computer.toJSON(),
+                'board': self.board.toJSON()}
