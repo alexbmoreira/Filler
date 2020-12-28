@@ -74,6 +74,14 @@ a {
 		opacity: 75%;
 	}
 }
+@media (max-width: 415px)
+{
+	.tile {
+		height: 40px;
+		width: 40px;
+	}
+}
+
 .option-tile {
 	cursor: pointer;
 	height: 50px;
