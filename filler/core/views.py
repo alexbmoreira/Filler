@@ -11,10 +11,10 @@ def index():
     game = Game()
     return render_template("home/index.html", game=game.toJSON())
 
-@app.route('/make-move', methods=["POST"])
+@app.route('/make-move')
 def make_move():
     global game
-    color = Color(request.form["color"])
+    color = Color(request.args["color"])
     game.player_1.makeMove(game.board, color)
 
     return render_template("home/game.html", game=game.toJSON())

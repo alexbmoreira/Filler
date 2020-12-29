@@ -8,7 +8,7 @@ $(document).ready(function()
         {
             $.ajax(
             {
-                type: "POST",
+                type: "GET",
                 data: { color: color },
                 url: "/make-move",
                 success: async function(response)
