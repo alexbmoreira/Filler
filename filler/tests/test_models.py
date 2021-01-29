@@ -6,25 +6,25 @@ from ..filler.models import (Board, Color, ColorChoice, Computer, Game, Player,
 
 class TestColor(unittest.TestCase):
 
-    def test_toJSON(self):
+    def test_toDict(self):
         # Arrange
         col = 'red'
 
         # Act
-        color_json = Color(col).toJSON()
+        color_json = Color(col).toDict()
 
         # Assert
         self.assertEqual(color_json, {'name': 'red'})
 
 class TestTile(unittest.TestCase):
 
-    def test_toJSON(self):
+    def test_toDict(self):
         # Arrange
         tile_col = 'red'
         tile_player = 1
 
         # Act
-        tile_json = Tile(tile_col, tile_player).toJSON()
+        tile_json = Tile(tile_col, tile_player).toDict()
 
         # Assert
         self.assertEqual(tile_json['player'], 1)
@@ -32,14 +32,14 @@ class TestTile(unittest.TestCase):
 
 class TestPlayer(unittest.TestCase):
 
-    def test_toJSON(self):
+    def test_toDict(self):
         # Arrange
         player_num = 1
         player_col = 'red'
         player_score = 0
 
         # Act
-        player_json = Player(player_num, player_col, player_score).toJSON()
+        player_json = Player(player_num, player_col, player_score).toDict()
 
         # Assert
         self.assertEqual(player_json['player_num'], 1)
@@ -48,7 +48,7 @@ class TestPlayer(unittest.TestCase):
 
 class TestBoard(unittest.TestCase):
 
-    def test_toJSON(self):
+    def test_toDict(self):
         # Arrange
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
@@ -56,7 +56,7 @@ class TestBoard(unittest.TestCase):
         test_size = 3
 
         # Act
-        board_json = Board(test_size, test_board).toJSON()
+        board_json = Board(test_size, test_board).toDict()
 
         # Assert
         self.assertEqual(board_json['size'], 3)
@@ -79,7 +79,7 @@ class TestBoard(unittest.TestCase):
 
 class TestGame(unittest.TestCase):
 
-    def test_toJSON(self):
+    def test_toDict(self):
         # Arrange
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
@@ -87,7 +87,7 @@ class TestGame(unittest.TestCase):
         test_size = 3
 
         # Act
-        game_json = Game(test_board, test_size).toJSON()
+        game_json = Game(test_board, test_size).toDict()
 
         # Assert
         self.assertEqual(game_json['player_1']['player_num'], 1)

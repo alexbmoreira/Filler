@@ -11,7 +11,7 @@ class Color():
     def __str__(self):
         return self.name
         
-    def toJSON(self):
+    def toDict(self):
         return {'name': self.name}
 
 class ColorChoice(Color):
@@ -19,7 +19,7 @@ class ColorChoice(Color):
         super().__init__(name)
         self.available = available
 
-    def toJSON(self):
+    def toDict(self):
         return {'name': self.name,
                 'available': self.available}
 
@@ -29,9 +29,9 @@ class Tile():
         self.player = player
         self.color = Color(color)
 
-    def toJSON(self):
+    def toDict(self):
         return {'player': self.player,
-                'color': self.color.toJSON()}
+                'color': self.color.toDict()}
 
 class Player():
 
@@ -75,9 +75,9 @@ class Player():
         elif j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
             coords_list.append((i, j))
 
-    def toJSON(self):
+    def toDict(self):
         return {'player_num': self.player_num,
-                'color': self.color.toJSON(),
+                'color': self.color.toDict(),
                 'score': self.score}
 
 class Computer(Player):
@@ -176,10 +176,10 @@ class Board():
         
         return new_grid
 
-    def toJSON(self):
+    def toDict(self):
         return {'size': self.size,
-                'colors': [color.toJSON() for color in self.colors],
-                'grid': [[tile.toJSON() for tile in row] for row in self.grid]}
+                'colors': [color.toDict() for color in self.colors],
+                'grid': [[tile.toDict() for tile in row] for row in self.grid]}
 
 class Game():
 
@@ -196,7 +196,7 @@ class Game():
     def __str__(self):
         return str(self.board)
 
-    def toJSON(self):
-        return {'player_1': self.player_1.toJSON(),
-                'computer': self.computer.toJSON(),
-                'board': self.board.toJSON()}
+    def toDict(self):
+        return {'player_1': self.player_1.toDict(),
+                'computer': self.computer.toDict(),
+                'board': self.board.toDict()}
