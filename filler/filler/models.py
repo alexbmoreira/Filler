@@ -212,15 +212,22 @@ class Board():
 
 class Game():
 
-    def __init__(self, board = None, board_size = 3):
+    def __init__(self, board = None, board_size = 3, player_1 = None, computer = None):
         if board == None:
             self.board = Board(8)
         else:
-            self.board = Board(board_size, board)
+            if type(board) is list:
+                self.board = Board(board_size, board)
+            else:
+                self.board = board
         
-        end_loc = self.board.size - 1
-        self.player_1 = Player(1, self.board.grid[0][0].color.name)
-        self.computer = Computer(2, self.board.grid[end_loc][end_loc].color.name)
+        if player_1 == None and computer == None:
+            end_loc = self.board.size - 1
+            self.player_1 = Player(1, self.board.grid[0][0].color.name)
+            self.computer = Computer(2, self.board.grid[end_loc][end_loc].color.name)
+        else:
+            self.player_1 = player_1
+            self.computer = computer
 
     def __str__(self):
         return str(self.board)
@@ -229,3 +236,10 @@ class Game():
         return {'player_1': self.player_1.toDict(),
                 'computer': self.computer.toDict(),
                 'board': self.board.toDict()}
+
+    @classmethod
+    def fromDict(cls, d):
+        p_1 = Player.fromDict(d['player_1'])
+        comp = Computer.fromDict(d['computer'])
+        board = Board.fromDict(d['board'])
+        return cls(board, player_1=p_1, computer=comp)
