@@ -93,6 +93,11 @@ class Player():
                 'color': self.color.toDict(),
                 'score': self.score}
 
+    @classmethod
+    def fromDict(cls, d):
+        col = Color.fromDict(d['color'])
+        return cls(d['player_num'], col, d['score'])
+
 class Computer(Player):
 
     def aiMakeMove(self, board):

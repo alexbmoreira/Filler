@@ -59,7 +59,7 @@ class TestPlayer(unittest.TestCase):
         # Arrange
         player_num = 1
         player_col = 'red'
-        player_score = 0
+        player_score = 1
 
         # Act
         player_json = Player(player_num, player_col, player_score).toDict()
@@ -67,7 +67,20 @@ class TestPlayer(unittest.TestCase):
         # Assert
         self.assertEqual(player_json['player_num'], 1)
         self.assertEqual(player_json['color'], {'name': 'red'})
-        self.assertEqual(player_json['score'], 0)
+        self.assertEqual(player_json['score'], 1)
+
+    def test_fromDict(self):
+        # Arrange
+        py_obj = Player(1, Color('red'), 1)
+        test_dict = {'player_num': 1, 'color': {'name': 'red'}, 'score': 1}
+
+        # Act
+        plyr = Player.fromDict(test_dict)
+
+        # Assert
+        self.assertEqual(plyr.player_num, py_obj.player_num)
+        self.assertEqual(plyr.color.name, py_obj.color.name)
+        self.assertEqual(plyr.score, py_obj.score)
 
 class TestBoard(unittest.TestCase):
 
