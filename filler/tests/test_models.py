@@ -159,30 +159,39 @@ class TestGame(unittest.TestCase):
 
     def test_possibleMoves(self):
         # Arrange
-
-        # Act
-
-        # Assert
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 2)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("red", 2)],
                     [Tile("black", 0), Tile("red", 2), Tile("red", 2)]]
-        test_game = Game(test_board)
+        test_size = 3
+        test_game = Game(test_board, test_size)
 
-        self.assertEqual(test_game.computer.possibleMoves(test_game.board), {'black': 1, 'blue': 1, 'purple': 1})
+        # Act
+        possible_moves = test_game.computer.possibleMoves(test_game.board)
+
+        # Assert
+        self.assertEqual(possible_moves, {'black': 1, 'blue': 1, 'purple': 1, 'yellow': 0, 'green': 0, 'red': 0})
 
     def test_makeThenFindPossible(self):
         # Arrange
-
-        # Act
-
-        # Assert
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
-        test_game = Game(test_board)
-        test_game.computer.makeMove(test_game.board, Color('blue'))
+        test_size = 3
+        test_game = Game(test_board, test_size)
 
-        self.assertEqual(test_game.computer.possibleMoves(test_game.board), {'black': 1, 'green': 1, 'purple': 1})
+        move_color = 'blue'
+
+        # Act
+        test_game.computer.makeMove(test_game.board, Color(move_color))
+        possible_moves = test_game.computer.possibleMoves(test_game.board)
+
+        # Assert
+        self.assertEqual(test_game.computer.score, 2)
+        self.assertEqual(test_game.board.grid[2][2].player, 2)
+        self.assertEqual(test_game.board.grid[2][2].color.name, 'blue')
+        self.assertEqual(test_game.board.grid[2][1].player, 2)
+        self.assertEqual(test_game.board.grid[2][1].color.name, 'blue')
+        self.assertEqual(possible_moves, {'black': 1, 'green': 1, 'purple': 1, 'yellow': 0, 'red': 0})
     
     def test_determineBest(self):
         # Arrange
