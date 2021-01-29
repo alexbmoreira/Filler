@@ -14,6 +14,10 @@ class Color():
     def toDict(self):
         return {'name': self.name}
 
+    @classmethod
+    def fromDict(cls, d):
+        return cls(d['name'])
+
 class ColorChoice(Color):
     def __init__(self, name, available = True):
         super().__init__(name)

@@ -16,6 +16,17 @@ class TestColor(unittest.TestCase):
         # Assert
         self.assertEqual(color_json, {'name': 'red'})
 
+    def test_fromDict(self):
+        # Arrange
+        py_obj = Color('red')
+        test_dict = {'name': 'red'}
+
+        # Act
+        color = Color.fromDict(test_dict)
+
+        # Assert
+        self.assertEqual(color.name, py_obj.name)
+
 class TestTile(unittest.TestCase):
 
     def test_toDict(self):
