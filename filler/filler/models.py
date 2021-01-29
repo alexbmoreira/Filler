@@ -7,6 +7,9 @@ class Color():
 
     def __repr__(self):
         return self.name
+
+    def __str__(self):
+        return self.name
         
     def toJSON(self):
         return {'name': self.name}
@@ -180,11 +183,11 @@ class Board():
 
 class Game():
 
-    def __init__(self, board = None):
+    def __init__(self, board = None, board_size = 3):
         if board == None:
             self.board = Board(8)
         else:
-            self.board = Board(3, board)
+            self.board = Board(board_size, board)
         
         end_loc = self.board.size - 1
         self.player_1 = Player(1, self.board.grid[0][0].color.name)
