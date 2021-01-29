@@ -115,46 +115,23 @@ class TestGame(unittest.TestCase):
 
     def test_makeMove(self):
         # Arrange
-
-        # Act
-
-        # Assert
         test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
-        test_game = Game(test_board)
-        test_game.player_1.makeMove(test_game.board, Color('blue'))
+        test_size = 3
+        test_game = Game(test_board, test_size)
 
-        self.assertEqual(test_game.toJSON(), {'player_1': {'player_num': 1, 'color': {'name': 'blue'}, 'score': 2},
-                                                'computer': {'player_num': 2, 'color': {'name': 'red'}, 'score': 1},
-                                                'board': {
-                                                        'size': 3,
-                                                        'colors': [
-                                                            {'name': 'red', 'available': True},
-                                                            {'name': 'blue', 'available': False},
-                                                            {'name': 'green', 'available': True},
-                                                            {'name': 'purple', 'available': True},
-                                                            {'name': 'yellow', 'available': True},
-                                                            {'name': 'black', 'available': True}
-                                                            ],
-                                                        'grid': [
-                                                            [
-                                                                {'player': 1, 'color': {'name': 'blue'}},
-                                                                {'player': 1, 'color': {'name': 'blue'}},
-                                                                {'player': 0, 'color': {'name': 'red'}}
-                                                            ],
-                                                            [
-                                                                {'player': 0, 'color': {'name': 'yellow'}},
-                                                                {'player': 0, 'color': {'name': 'purple'}},
-                                                                {'player': 0, 'color': {'name': 'green'}}
-                                                            ],
-                                                            [
-                                                                {'player': 0, 'color': {'name': 'black'}},
-                                                                {'player': 0, 'color': {'name': 'blue'}},
-                                                                {'player': 2, 'color': {'name': 'red'}}
-                                                            ]
-                                                        ]}
-                                                    })
+        move_color = 'blue'
+
+        # Act
+        test_game.player_1.makeMove(test_game.board, Color(move_color))
+
+        # Assert
+        self.assertEqual(test_game.player_1.score, 2)
+        self.assertEqual(test_game.board.grid[0][0].player, 1)
+        self.assertEqual(test_game.board.grid[0][0].color.name, move_color)
+        self.assertEqual(test_game.board.grid[0][1].player, 1)
+        self.assertEqual(test_game.board.grid[0][1].color.name, move_color)
 
     def test_makeTwoMoves(self):
         # Arrange
