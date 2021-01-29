@@ -3,7 +3,7 @@ import random
 class Color():
 
     def __init__(self, name):
-        self.name = name
+        self.name = str(name)
 
     def __repr__(self):
         return self.name
@@ -27,15 +27,24 @@ class ColorChoice(Color):
         return {'name': self.name,
                 'available': self.available}
 
+    @classmethod
+    def fromDict(cls, d):
+        return cls(d['name'], d['available'])
+
 class Tile():
 
     def __init__(self, color, player):
-        self.player = player
         self.color = Color(color)
+        self.player = player
 
     def toDict(self):
         return {'player': self.player,
                 'color': self.color.toDict()}
+
+    @classmethod
+    def fromDict(cls, d):
+        col = Color.fromDict(d['color'])
+        return cls(col, d['player'])
 
 class Player():
 

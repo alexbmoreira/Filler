@@ -41,6 +41,18 @@ class TestTile(unittest.TestCase):
         self.assertEqual(tile_json['player'], 1)
         self.assertEqual(tile_json['color'], {'name': 'red'})
 
+    def test_fromDict(self):
+        # Arrange
+        py_obj = Tile(Color('red'), 1)
+        test_dict = {'player': 1, 'color': {'name': 'red'}}
+
+        # Act
+        tile = Tile.fromDict(test_dict)
+
+        # Assert
+        self.assertEqual(tile.player, py_obj.player)
+        self.assertEqual(tile.color.name, py_obj.color.name)
+
 class TestPlayer(unittest.TestCase):
 
     def test_toDict(self):
