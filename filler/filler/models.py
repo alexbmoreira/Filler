@@ -145,15 +145,15 @@ class Board():
     def __init__(self, size, grid = None, colors = None):
         self.size = size
 
-        if colors == None:
-            self.colors = [ColorChoice(color.name) for color in self.colors]
-        else:
-            self.colors = [ColorChoice.fromDict(d) for d in colors]
-
         if grid == None:
             self.grid = self.createBoard()
         else:
             self.grid = grid
+
+        if colors == None:
+            self.colors = [ColorChoice(color.name) for color in self.colors]
+        else:
+            self.colors = colors
 
     def __str__(self):
         return_string = ""
@@ -204,9 +204,11 @@ class Board():
                 'colors': [color.toDict() for color in self.colors],
                 'grid': [[tile.toDict() for tile in row] for row in self.grid]}
 
-    # @classmethod
-    # def fromDict(cls, d):
-    #     return cls(d['size'], d['colors'], d['grid'])
+    @classmethod
+    def fromDict(cls, d):
+        grid = [[Tile.fromDict(d) for d in row] for row in d['grid']]
+        c_choices = [ColorChoice.fromDict(col) for col in d['colors']]
+        return cls(d['size'], grid, c_choices)
 
 class Game():
 

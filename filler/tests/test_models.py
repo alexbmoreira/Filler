@@ -112,23 +112,25 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board_json['grid'][2][1], {'player': 0, 'color': {'name': 'blue'}})
         self.assertEqual(board_json['grid'][2][2], {'player': 2, 'color': {'name': 'red'}})
 
-    # def test_fromDict(self):
-    #     # Arrange
-    #     test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
-    #                 [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
-    #                 [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
-    #     py_obj = Board(3, test_board)
+    def test_fromDict(self):
+        # Arrange
+        test_board = [[Tile("black", 1), Tile("blue", 0), Tile("red", 0)],
+                    [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
+                    [Tile("black", 0), Tile("blue", 0), Tile("red", 2)]]
+        py_obj = Board(3, test_board)
 
-    #     test_dict = py_obj.toDict()
-    #     print(test_dict)
+        test_dict = py_obj.toDict()
 
-    #     # Act
-    #     brd = Board.fromDict(test_dict)
+        # Act
+        brd = Board.fromDict(test_dict)
 
-    #     # Assert
-    #     self.assertEqual(brd.size, py_obj.size)
-    #     self.assertEqual(brd.colors, py_obj.colors)
-    #     self.assertEqual(brd.grid, py_obj.grid)
+        # Assert
+        brd_tiles = [[t.color.name for t in row] for row in brd.grid]
+        pyo_tiles = [[t.color.name for t in row] for row in py_obj.grid]
+
+        self.assertEqual(brd.size, py_obj.size)
+        self.assertEqual([c.name for c in brd.colors], [c.name for c in py_obj.colors])
+        self.assertEqual(brd_tiles, pyo_tiles)
 
 
 class TestGame(unittest.TestCase):
