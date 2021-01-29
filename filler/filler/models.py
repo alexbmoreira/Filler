@@ -3,7 +3,7 @@ import random
 class Color():
 
     def __init__(self, name):
-        self.name = name
+        self.name = str(name)
 
     def __repr__(self):
         return self.name
@@ -11,27 +11,40 @@ class Color():
     def __str__(self):
         return self.name
         
-    def toJSON(self):
+    def toDict(self):
         return {'name': self.name}
+
+    @classmethod
+    def fromDict(cls, d):
+        return cls(d['name'])
 
 class ColorChoice(Color):
     def __init__(self, name, available = True):
         super().__init__(name)
         self.available = available
 
-    def toJSON(self):
+    def toDict(self):
         return {'name': self.name,
                 'available': self.available}
+
+    @classmethod
+    def fromDict(cls, d):
+        return cls(d['name'], d['available'])
 
 class Tile():
 
     def __init__(self, color, player):
-        self.player = player
         self.color = Color(color)
+        self.player = player
 
-    def toJSON(self):
+    def toDict(self):
         return {'player': self.player,
-                'color': self.color.toJSON()}
+                'color': self.color.toDict()}
+
+    @classmethod
+    def fromDict(cls, d):
+        col = Color.fromDict(d['color'])
+        return cls(col, d['player'])
 
 class Player():
 
@@ -75,10 +88,15 @@ class Player():
         elif j < board.size - 1 and board.grid[i][j + 1].player == self.player_num:
             coords_list.append((i, j))
 
-    def toJSON(self):
+    def toDict(self):
         return {'player_num': self.player_num,
-                'color': self.color.toJSON(),
+                'color': self.color.toDict(),
                 'score': self.score}
+
+    @classmethod
+    def fromDict(cls, d):
+        col = Color.fromDict(d['color'])
+        return cls(d['player_num'], col, d['score'])
 
 class Computer(Player):
 
@@ -124,13 +142,18 @@ class Board():
 
     grid = []
 
-    def __init__(self, size, grid = None):
+    def __init__(self, size, grid = None, colors = None):
         self.size = size
-        self.colors = [ColorChoice(color.name) for color in self.colors]
+
         if grid == None:
             self.grid = self.createBoard()
         else:
             self.grid = grid
+
+        if colors == None:
+            self.colors = [ColorChoice(color.name) for color in self.colors]
+        else:
+            self.colors = colors
 
     def __str__(self):
         return_string = ""
@@ -176,27 +199,47 @@ class Board():
         
         return new_grid
 
-    def toJSON(self):
+    def toDict(self):
         return {'size': self.size,
-                'colors': [color.toJSON() for color in self.colors],
-                'grid': [[tile.toJSON() for tile in row] for row in self.grid]}
+                'colors': [color.toDict() for color in self.colors],
+                'grid': [[tile.toDict() for tile in row] for row in self.grid]}
+
+    @classmethod
+    def fromDict(cls, d):
+        grid = [[Tile.fromDict(d) for d in row] for row in d['grid']]
+        c_choices = [ColorChoice.fromDict(col) for col in d['colors']]
+        return cls(d['size'], grid, c_choices)
 
 class Game():
 
-    def __init__(self, board = None, board_size = 3):
+    def __init__(self, board = None, board_size = 3, player_1 = None, computer = None):
         if board == None:
             self.board = Board(8)
         else:
-            self.board = Board(board_size, board)
+            if type(board) is list:
+                self.board = Board(board_size, board)
+            else:
+                self.board = board
         
-        end_loc = self.board.size - 1
-        self.player_1 = Player(1, self.board.grid[0][0].color.name)
-        self.computer = Computer(2, self.board.grid[end_loc][end_loc].color.name)
+        if player_1 == None and computer == None:
+            end_loc = self.board.size - 1
+            self.player_1 = Player(1, self.board.grid[0][0].color.name)
+            self.computer = Computer(2, self.board.grid[end_loc][end_loc].color.name)
+        else:
+            self.player_1 = player_1
+            self.computer = computer
 
     def __str__(self):
         return str(self.board)
 
-    def toJSON(self):
-        return {'player_1': self.player_1.toJSON(),
-                'computer': self.computer.toJSON(),
-                'board': self.board.toJSON()}
+    def toDict(self):
+        return {'player_1': self.player_1.toDict(),
+                'computer': self.computer.toDict(),
+                'board': self.board.toDict()}
+
+    @classmethod
+    def fromDict(cls, d):
+        p_1 = Player.fromDict(d['player_1'])
+        comp = Computer.fromDict(d['computer'])
+        board = Board.fromDict(d['board'])
+        return cls(board, player_1=p_1, computer=comp)
