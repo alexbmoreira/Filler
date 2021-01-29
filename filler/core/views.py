@@ -9,7 +9,7 @@ game = None
 def index():
     global game
     game = Game()
-    return render_template("home/index.html", game=game.toJSON())
+    return render_template("home/index.html", game=game.toDict())
 
 @app.route('/make-move')
 def make_move():
@@ -17,11 +17,11 @@ def make_move():
     color = Color(request.args["color"])
     game.player_1.makeMove(game.board, color)
 
-    return render_template("home/game.html", game=game.toJSON())
+    return render_template("home/game.html", game=game.toDict())
 
 @app.route('/ai-make-move')
 def ai_make_move():
     global game
     game.computer.aiMakeMove(game.board)
 
-    return render_template("home/game.html", game=game.toJSON())
+    return render_template("home/game.html", game=game.toDict())
