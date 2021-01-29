@@ -195,61 +195,40 @@ class TestGame(unittest.TestCase):
     
     def test_determineBest(self):
         # Arrange
-
-        # Act
-
-        # Assert
         test_board = [[Tile("black", 1), Tile("black", 1), Tile("yellow", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("purple", 0), Tile("red", 2), Tile("red", 2)]]
-        test_game = Game(test_board)
+        test_size = 3
+        test_game = Game(test_board, test_size)
 
-        self.assertEqual(test_game.computer.determineBestMove(test_game.board).toJSON(), {'name': 'purple'})
+        # Act
+        best_move = test_game.computer.determineBestMove(test_game.board)
+
+        # Assert
+        self.assertEqual(best_move.name, 'purple')
     
     def test_aiMoveMaking(self):
         # Arrange
-
-        # Act
-
-        # Assert
         test_board = [[Tile("black", 1), Tile("black", 1), Tile("yellow", 0)],
                     [Tile("yellow", 0), Tile("purple", 0), Tile("green", 0)],
                     [Tile("purple", 0), Tile("red", 2), Tile("red", 2)]]
-        test_game = Game(test_board)
-        test_game.player_1.score = 2
+        test_size = 3
+        test_game = Game(test_board, test_size)
         test_game.computer.score = 2
+
+        # Act
         test_game.computer.aiMakeMove(test_game.board)
 
-        self.assertEqual(test_game.toJSON(), {'player_1': {'player_num': 1, 'color': {'name': 'black'}, 'score': 2},
-                                                'computer': {'player_num': 2, 'color': {'name': 'purple'}, 'score': 4},
-                                                'board': {
-                                                        'size': 3,
-                                                        'colors': [
-                                                            {'name': 'red', 'available': True},
-                                                            {'name': 'blue', 'available': True},
-                                                            {'name': 'green', 'available': True},
-                                                            {'name': 'purple', 'available': False},
-                                                            {'name': 'yellow', 'available': True},
-                                                            {'name': 'black', 'available': True}
-                                                            ],
-                                                        'grid': [
-                                                            [
-                                                                {'player': 1, 'color': {'name': 'black'}},
-                                                                {'player': 1, 'color': {'name': 'black'}},
-                                                                {'player': 0, 'color': {'name': 'yellow'}}
-                                                            ],
-                                                            [
-                                                                {'player': 0, 'color': {'name': 'yellow'}},
-                                                                {'player': 2, 'color': {'name': 'purple'}},
-                                                                {'player': 0, 'color': {'name': 'green'}}
-                                                            ],
-                                                            [
-                                                                {'player': 2, 'color': {'name': 'purple'}},
-                                                                {'player': 2, 'color': {'name': 'purple'}},
-                                                                {'player': 2, 'color': {'name': 'purple'}}
-                                                            ]
-                                                        ]}
-                                                    })
+        # Assert
+        self.assertEqual(test_game.computer.score, 4)
+        self.assertEqual(test_game.board.grid[2][2].player, 2)
+        self.assertEqual(test_game.board.grid[2][2].color.name, 'purple')
+        self.assertEqual(test_game.board.grid[2][1].player, 2)
+        self.assertEqual(test_game.board.grid[2][1].color.name, 'purple')
+        self.assertEqual(test_game.board.grid[2][0].player, 2)
+        self.assertEqual(test_game.board.grid[2][0].color.name, 'purple')
+        self.assertEqual(test_game.board.grid[1][1].player, 2)
+        self.assertEqual(test_game.board.grid[1][1].color.name, 'purple')
 
 if __name__ == '__main__':
     unittest.main()
