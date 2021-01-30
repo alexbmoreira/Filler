@@ -1,27 +1,30 @@
 from flask import Flask, make_response, render_template, jsonify, request, session, redirect, url_for
 from ..filler.models import Game, Color
+import json
 
 app = Flask(__name__)
 
-game = None
-
 @app.route('/')
 def index():
-    global game
     game = Game()
-    return render_template("home/index.html", game=game.toDict())
+    return render_template("home/index.html", game=game.toDict(), json=json.dumps(game.toDict()))
 
-@app.route('/make-move')
+@app.route('/make-move', methods=["POST"])
 def make_move():
-    global game
-    color = Color(request.args["color"])
+    data = request.get_json()
+
+    color = Color(data["color"])
+    game = Game.fromDict(data["game"])
+
     game.player_1.makeMove(game.board, color)
 
-    return render_template("home/game.html", game=game.toDict())
+    return render_template("home/game.html", game=game.toDict(), json=json.dumps(game.toDict()))
 
-@app.route('/ai-make-move')
+@app.route('/ai-make-move', methods=["POST"])
 def ai_make_move():
-    global game
+    data = request.get_json()
+
+    game = Game.fromDict(data["game"])
     game.computer.aiMakeMove(game.board)
 
-    return render_template("home/game.html", game=game.toDict())
+    return render_template("home/game.html", game=game.toDict(), json=json.dumps(game.toDict()))

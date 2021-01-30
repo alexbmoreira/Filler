@@ -145,15 +145,15 @@ class Board():
     def __init__(self, size, grid = None, colors = None):
         self.size = size
 
-        if grid == None:
-            self.grid = self.createBoard()
-        else:
-            self.grid = grid
-
         if colors == None:
             self.colors = [ColorChoice(color.name) for color in self.colors]
         else:
             self.colors = colors
+
+        if grid == None:
+            self.grid = self.createBoard()
+        else:
+            self.grid = grid
 
     def __str__(self):
         return_string = ""

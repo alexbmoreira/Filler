@@ -1,19 +1,27 @@
 $(document).ready(function()
 {
+    game_data = $("#board").data("game")
+    window.localStorage.setItem('game', JSON.stringify(game_data))
+
     can_move = true;
+
     $(document).on("click", ".option-tile.valid", function()
     {
         color = $(this).data("color");
         if(can_move)
         {
+            game = JSON.parse(window.localStorage.getItem('game'))
             $.ajax(
             {
-                type: "GET",
-                data: { color: color },
+                type: "POST",
+                data: JSON.stringify({ color: color, game: game }),
+                contentType: "application/json",
                 url: "/make-move",
                 success: async function(response)
                 {
+                    window.localStorage.removeItem('game')
                     $("#game-container").html(response);
+                    window.localStorage.setItem('game', JSON.stringify($("#board").data("game")))
                     can_move = false;
 
                     if($("#player-score").data("score") + $("#computer-score").data("score") < 64)
@@ -35,13 +43,18 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function aiMakeMove()
 {
+    game = JSON.parse(window.localStorage.getItem('game'))
     $.ajax(
     {
-        type: "GET",
+        type: "POST",
+        data: JSON.stringify({ game: game }),
+        contentType: "application/json",
         url: "/ai-make-move",
         success: async function(response)
         {
+            window.localStorage.removeItem('game')
             $("#game-container").html(response);
+            window.localStorage.setItem('game', JSON.stringify($("#board").data("game")))
 
             if($("#player-score").data("score") + $("#computer-score").data("score") < 64)
             {
