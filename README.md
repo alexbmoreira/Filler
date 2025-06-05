@@ -21,20 +21,14 @@ The highest score after the board has been filled wins!
 Use a virtual environment and pip install dependencies:
 
 ```shell
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -r requirements.txt
+docker compose build
+docker compose up -d
 ```
 
-Within the virtual environment, run the server:
-```shell
-export FLASK_APP=run.py
-export FLASK_ENV=development
-flask run
-```
+Access the server at `localhost:5000`.
 
 ## Testing
 
 ```shell
-python3 -m filler.tests.test_models
+docker compose exec filler python -m filler.tests.test_models
 ```

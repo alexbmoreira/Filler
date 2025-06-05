@@ -71,7 +71,7 @@ a {
 }
 @keyframes player-tile {
 	50% {
-		opacity: 75%;
+		opacity: 50%;
 	}
 }
 @media (max-width: 415px)
@@ -115,6 +115,7 @@ a {
 
 .outcome {
 	padding: 5px 10px;
+	margin-bottom: 25px;
 	border-radius: 0.25em;
 	filter: var(--outcome-shadow);
 	transform: scale(100%);

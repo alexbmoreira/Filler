@@ -10,11 +10,11 @@
 
 		<title>{% block title %}{% endblock title %}</title>
 
-		<!-- Stylesheets -->
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
 		{% block styles %}{% endblock styles %}
 
-		<!-- Scripts -->
 		<script src="https://kit.fontawesome.com/4233858d6d.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		{% block scripts %}{% endblock scripts %}
