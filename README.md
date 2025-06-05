@@ -6,7 +6,7 @@ A filler game played against a computer.
 
 The goal is to fill as much of the board as you can.
 
-You and the computer will wach start with one square in the top left and bottom right corners, respectively.
+You and the computer will each start with one square in the top left and bottom right corners, respectively.
 
 Choose a color on the bottom to make your move.
 
@@ -18,14 +18,13 @@ The highest score after the board has been filled wins!
 
 ## Running the Flask server
 
-Use a virtual environment and pip install dependencies:
+Build and run with docker
 
 ```shell
-docker compose build
-docker compose up -d
+docker compose up -d --build
 ```
 
-Access the server at `localhost:5000`.
+Access the server at `localhost:5500`.
 
 ## Testing
 
